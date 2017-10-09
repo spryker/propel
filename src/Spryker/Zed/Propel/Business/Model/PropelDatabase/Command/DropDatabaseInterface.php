@@ -5,19 +5,14 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Zed\Propel\Business\Model\PropelDatabase;
+namespace Spryker\Zed\Propel\Business\Model\PropelDatabase\Command;
 
-interface EngineAwareCommandInterface
+interface DropDatabaseInterface
 {
 
     /**
      * @return void
      */
-    public function __invoke();
-
-    /**
-     * @return string
-     */
-    public function getEngine();
+    public function dropDatabase();
 
 }
