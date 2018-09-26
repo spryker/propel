@@ -70,7 +70,7 @@ class DropPostgreSqlDatabase implements DropDatabaseInterface
      */
     protected function getPostgresVersion()
     {
-        $process = $this->getProcess('psql --version | awk \'{print $3}\' | cut -f1,2 -d\'.\'');
+        $process = $this->getProcess('psql --version | awk \'{print $3}\' | cut -f1,1 -d\'.\'');
         $process->run();
 
         if (!$process->isSuccessful()) {
