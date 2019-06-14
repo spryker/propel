@@ -7,6 +7,8 @@
 
 namespace Spryker\Zed\Propel\Communication\Console;
 
+use Exception;
+use Propel\Runtime\Connection\Exception\ConnectionException;
 use Spryker\Zed\Kernel\Communication\Console\Console;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -15,9 +17,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @method \Spryker\Zed\Propel\Business\PropelFacadeInterface getFacade()
  * @method \Spryker\Zed\Propel\Communication\PropelCommunicationFactory getFactory()
  */
-class SchemaCopyConsole extends Console
+class DatabaseDropTablesConsole extends Console
 {
-    public const COMMAND_NAME = 'propel:schema:copy';
+    public const COMMAND_NAME = 'propel:tables:drop';
 
     /**
      * @return void
@@ -25,7 +27,7 @@ class SchemaCopyConsole extends Console
     protected function configure()
     {
         $this->setName(self::COMMAND_NAME);
-        $this->setDescription('Copy schema files from packages to generated folder');
+        $this->setDescription('Dropping all database tables, without dropping the database.');
 
         parent::configure();
     }
@@ -34,13 +36,26 @@ class SchemaCopyConsole extends Console
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
-     * @return int|null
+     * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->info('Clean schema directory');
-        $this->getFacade()->cleanPropelSchemaDirectory();
-        $this->info('Copy and merge schema files');
-        $this->getFacade()->copySchemaFilesToTargetDirectory();
+        $this->info('Dropping all database tables.');
+
+        try {
+            $this->getFacade()->dropDatabaseTables();
+            $this->info('All database tables have been dropped.');
+        } catch (ConnectionException $exception) {
+            $this->error('Database is not reachable.');
+
+            return static::CODE_ERROR;
+        } catch (Exception $exception) {
+            $this->error('Error happened during dropping database tables.');
+            $this->error($exception->getMessage());
+
+            return static::CODE_ERROR;
+        }
+
+        return static::CODE_SUCCESS;
     }
 }
