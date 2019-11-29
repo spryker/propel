@@ -5,14 +5,16 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Service\Propel\Plugin\HealthCheck;
+namespace Spryker\Zed\Propel\Communication\Plugin\HealthCheck;
 
 use Generated\Shared\Transfer\HealthCheckServiceResponseTransfer;
-use Spryker\Service\HealthCheckExtension\Dependency\Plugin\HealthCheckPluginInterface;
-use Spryker\Service\Kernel\AbstractPlugin;
+use Spryker\Shared\HealthCheckExtension\Dependency\Plugin\HealthCheckPluginInterface;
+use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
- * @method \Spryker\Service\Propel\PropelService getService()
+ * @method \Spryker\Zed\Propel\Communication\PropelCommunicationFactory getFactory()
+ * @method \Spryker\Zed\Propel\Business\PropelFacadeInterface getFacade()
+ * @method \Spryker\Zed\Propel\PropelConfig getConfig()
  */
 class DatabaseHealthCheckPlugin extends AbstractPlugin implements HealthCheckPluginInterface
 {
@@ -39,6 +41,6 @@ class DatabaseHealthCheckPlugin extends AbstractPlugin implements HealthCheckPlu
      */
     public function check(): HealthCheckServiceResponseTransfer
     {
-        return $this->getService()->checkDatabaseHealthIndicator();
+        return $this->getFacade()->executeDatabaseHealthCheck();
     }
 }

@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Service\Propel\HealthIndicator;
+namespace Spryker\Zed\Propel\Business\Model\HealthIndicator;
 
 use Generated\Shared\Transfer\HealthCheckServiceResponseTransfer;
 
