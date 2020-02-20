@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @method \Spryker\Zed\Propel\Communication\PropelCommunicationFactory getFactory()
  * @method \Spryker\Zed\Propel\Business\PropelFacadeInterface getFacade()
  */
-class EntityTransferRemoverConsole extends Console
+class RemoveEntityTransferConsole extends Console
 {
     public const COMMAND_NAME = 'transfer:entity:remove';
     public const COMMAND_DESCRIPTION = 'Removes generated entity transfer objects';
