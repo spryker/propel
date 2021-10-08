@@ -20,10 +20,13 @@ use Spryker\Shared\Propel\PropelConstants;
 
 class TableHelper extends Module
 {
+    /**
+     * @var string
+     */
     protected const DEFAULT_DATA_SOURCE_NAME = 'zed';
 
     /**
-     * @var \Propel\Generator\Model\Table[]
+     * @var array<\Propel\Generator\Model\Table>
      */
     protected $tables = [];
 

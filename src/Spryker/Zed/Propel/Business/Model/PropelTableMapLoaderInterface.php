@@ -7,10 +7,10 @@
 
 namespace Spryker\Zed\Propel\Business\Model;
 
-interface PropelSchemaFinderInterface
+interface PropelTableMapLoaderInterface
 {
     /**
-     * @return \Symfony\Component\Finder\Finder<\Symfony\Component\Finder\SplFileInfo>
+     * @return bool
      */
-    public function getSchemaFiles();
+    public function loadTableMap(): bool;
 }

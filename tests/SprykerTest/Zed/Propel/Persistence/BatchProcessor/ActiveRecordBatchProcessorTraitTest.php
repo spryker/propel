@@ -29,6 +29,9 @@ use Throwable;
  */
 class ActiveRecordBatchProcessorTraitTest extends Unit
 {
+    /**
+     * @var array
+     */
     protected const MODULES_TO_EXCLUDE = [
         'Payone',
     ];
@@ -44,7 +47,7 @@ class ActiveRecordBatchProcessorTraitTest extends Unit
     protected $queryClasses;
 
     /**
-     * @return array[]
+     * @return array<array>
      */
     public function dataProvider(): array
     {
@@ -266,7 +269,7 @@ class ActiveRecordBatchProcessorTraitTest extends Unit
     }
 
     /**
-     * @param \Propel\Runtime\Map\ColumnMap[] $columnMapCollection
+     * @param array<\Propel\Runtime\Map\ColumnMap> $columnMapCollection
      * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
      *
      * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface
