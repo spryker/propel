@@ -56,6 +56,11 @@ class PropelBuildModelHelper extends Module
     /**
      * @var string
      */
+    protected const PROPEL_MODULE_NAMESPACE_BUSINESS = self::PROPEL_MODULE_NAMESPACE . '\Business';
+
+    /**
+     * @var string
+     */
     protected const SCHEMA_FILE_PATTERN = '*.schema.xml';
 
     /**
@@ -64,11 +69,16 @@ class PropelBuildModelHelper extends Module
     protected const SCHEMA_TARGET_DIRECTORY_DEFAULT = '/src/Orm/Propel/Schema';
 
     /**
+     * @var string
+     */
+    protected const SCHEMA_SOURCE_DIRECTORY_DEFAULT = 'src/Spryker/Zed/*/Persistence/Propel/Schema';
+
+    /**
      * @var array
      */
     protected $config = [
         self::CONFIG_SCHEMA_SOURCE_DIRECTORY_LIST => [
-            'src/Spryker/Zed/*/Persistence/Propel/Schema',
+            self::SCHEMA_SOURCE_DIRECTORY_DEFAULT,
         ],
         self::CONFIG_IS_ISOLATED_MODULE_TEST => false,
     ];
@@ -127,7 +137,10 @@ class PropelBuildModelHelper extends Module
      */
     private function getFacade(): PropelFacade
     {
-        return $this->getBusinessHelper()->getFacade(static::PROPEL_MODULE_NAME, static::PROPEL_MODULE_NAMESPACE . '\Business');
+        return $this->getBusinessHelper()->getFacade(
+            static::PROPEL_MODULE_NAME,
+            static::PROPEL_MODULE_NAMESPACE_BUSINESS,
+        );
     }
 
     /**

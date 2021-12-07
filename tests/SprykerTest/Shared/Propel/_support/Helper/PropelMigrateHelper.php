@@ -25,6 +25,13 @@ class PropelMigrateHelper extends Module
     protected const CONFIG_IS_ISOLATED_MODULE_TEST = 'isolated';
 
     /**
+     * @var array
+     */
+    protected $config = [
+        self::CONFIG_IS_ISOLATED_MODULE_TEST => false,
+    ];
+
+    /**
      * @return void
      */
     public function _beforeSuite($settings = []): void
