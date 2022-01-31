@@ -21,6 +21,7 @@ class BuildSqlConsole extends Console
      * @var string
      */
     public const COMMAND_NAME = 'propel:sql:build';
+
     /**
      * @var string
      */
@@ -31,7 +32,7 @@ class BuildSqlConsole extends Console
      */
     protected function configure()
     {
-        $this->setName(self::COMMAND_NAME);
+        $this->setName(static::COMMAND_NAME);
         $this->setDescription(static::COMMAND_DESCRIPTION);
 
         parent::configure();
@@ -52,7 +53,7 @@ class BuildSqlConsole extends Console
         return $this->getFactory()->createPropelCommandRunner()->runCommand(
             $command,
             $this->getDefinition(),
-            $output
+            $output,
         );
     }
 }

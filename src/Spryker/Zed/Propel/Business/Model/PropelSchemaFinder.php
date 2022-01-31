@@ -17,12 +17,12 @@ class PropelSchemaFinder implements PropelSchemaFinderInterface
     public const FILE_NAME_PATTERN = '*_*.schema.xml';
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected $pathPatterns;
 
     /**
-     * @param array $pathPatterns
+     * @param array<string> $pathPatterns
      */
     public function __construct(array $pathPatterns)
     {
@@ -30,14 +30,14 @@ class PropelSchemaFinder implements PropelSchemaFinderInterface
     }
 
     /**
-     * @return \Symfony\Component\Finder\Finder<\Symfony\Component\Finder\SplFileInfo>
+     * @return \Symfony\Component\Finder\Finder|\Symfony\Component\Finder\SplFileInfo[]
      */
     public function getSchemaFiles()
     {
         $finder = new Finder();
         $finder
             ->in($this->pathPatterns)
-            ->name(self::FILE_NAME_PATTERN)
+            ->name(static::FILE_NAME_PATTERN)
             ->depth(0);
 
         return $finder;
