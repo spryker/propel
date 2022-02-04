@@ -21,6 +21,7 @@ class PropelConfig extends AbstractBundleConfig
      * @var string
      */
     public const DB_ENGINE_MYSQL = 'mysql';
+
     /**
      * @var string
      */
@@ -38,6 +39,7 @@ class PropelConfig extends AbstractBundleConfig
      * - It can be modified by editing the sourcecode of postgres, which is not advised.
      *
      * @api
+     *
      * @var int
      */
     public const POSTGRES_INDEX_NAME_MAX_LENGTH = 63;
@@ -103,7 +105,7 @@ class PropelConfig extends AbstractBundleConfig
      */
     public function getPropelConfig()
     {
-        return array_replace_recursive($this->getDefaultPropelConfig(), $this->get(PropelConstants::PROPEL));
+        return array_replace_recursive($this->getDefaultPropelConfig(), $this->get(PropelConstants::PROPEL, []));
     }
 
     /**
@@ -163,7 +165,7 @@ class PropelConfig extends AbstractBundleConfig
     {
         return array_unique(array_merge(
             $this->getCorePropelSchemaPathPatterns(),
-            $this->getProjectPropelSchemaPathPatterns()
+            $this->getProjectPropelSchemaPathPatterns(),
         ));
     }
 
@@ -238,8 +240,8 @@ class PropelConfig extends AbstractBundleConfig
     {
         $dbEngine = $this->getCurrentDatabaseEngine();
         $supportedEngines = $this->get(PropelConstants::ZED_DB_SUPPORTED_ENGINES, [
-            self::DB_ENGINE_MYSQL => 'MySql',
-            self::DB_ENGINE_PGSQL => 'PostgreSql',
+            static::DB_ENGINE_MYSQL => 'MySql',
+            static::DB_ENGINE_PGSQL => 'PostgreSql',
         ]);
 
         if (!array_key_exists($dbEngine, $supportedEngines)) {

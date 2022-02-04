@@ -42,9 +42,9 @@ class PropelCommunicationFactory extends AbstractCommunicationFactory
      */
     public function createLogger()
     {
-        $defaultLogger = new Logger(self::LOGGER_NAME);
+        $defaultLogger = new Logger(static::LOGGER_NAME);
         $defaultLogger->pushHandler(
-            $this->createStreamHandler()
+            $this->createStreamHandler(),
         );
 
         return [$defaultLogger];
@@ -56,7 +56,7 @@ class PropelCommunicationFactory extends AbstractCommunicationFactory
     protected function createStreamHandler()
     {
         return new StreamHandler(
-            $this->getConfig()->getLogPath()
+            $this->getConfig()->getLogPath(),
         );
     }
 
@@ -75,7 +75,7 @@ class PropelCommunicationFactory extends AbstractCommunicationFactory
     {
         return new PropelCommandRunner(
             $this->createPropelCommandInputBuilder(),
-            $this->createPropelCommandConfigurator()
+            $this->createPropelCommandConfigurator(),
         );
     }
 
@@ -85,7 +85,7 @@ class PropelCommunicationFactory extends AbstractCommunicationFactory
     public function createPropelCommandConfigurator(): PropelCommandConfiguratorInterface
     {
         return new PropelCommandConfigurator(
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 

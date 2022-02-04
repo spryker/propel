@@ -22,10 +22,12 @@ class PropelInstallConsole extends Console
      * @var string
      */
     public const OPTION_NO_DIFF = 'no-diff';
+
     /**
      * @var string
      */
     public const OPTION_NO_DIFF_SHORTCUT = 'o';
+
     /**
      * @var string
      */
@@ -35,6 +37,7 @@ class PropelInstallConsole extends Console
      * @var string
      */
     public const COMMAND_NAME = 'propel:install';
+
     /**
      * @var string
      */
@@ -45,14 +48,14 @@ class PropelInstallConsole extends Console
      */
     protected function configure()
     {
-        $this->setName(self::COMMAND_NAME);
-        $this->setDescription(self::DESCRIPTION);
+        $this->setName(static::COMMAND_NAME);
+        $this->setDescription(static::DESCRIPTION);
 
         $this->addOption(
-            self::OPTION_NO_DIFF,
-            self::OPTION_NO_DIFF_SHORTCUT,
+            static::OPTION_NO_DIFF,
+            static::OPTION_NO_DIFF_SHORTCUT,
             InputOption::VALUE_NONE,
-            self::OPTION_NO_DIFF_DESCRIPTION
+            static::OPTION_NO_DIFF_DESCRIPTION,
         );
 
         parent::configure();
@@ -84,7 +87,7 @@ class PropelInstallConsole extends Console
      */
     protected function getDependingCommands()
     {
-        $noDiffOption = $this->input->getOption(self::OPTION_NO_DIFF);
+        $noDiffOption = $this->input->getOption(static::OPTION_NO_DIFF);
 
         $dependingCommands = [
             CreateDatabaseConsole::COMMAND_NAME,
@@ -120,8 +123,8 @@ class PropelInstallConsole extends Console
             $this->output->writeln(
                 sprintf(
                     '<fg=red>There is no command defined with the name "%s". Make sure the command was registered properly.</>',
-                    $command
-                )
+                    $command,
+                ),
             );
         }
 

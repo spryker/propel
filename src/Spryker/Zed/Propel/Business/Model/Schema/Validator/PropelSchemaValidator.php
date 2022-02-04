@@ -80,7 +80,7 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
     }
 
     /**
-     * @return array
+     * @return array<string, array>
      */
     protected function getSchemaFilesForValidation(): array
     {
@@ -160,7 +160,7 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
                 $toXmlElements,
                 $fromXmlElementName,
                 $fromXmlChildTagName,
-                $fromXmlChildElement
+                $fromXmlChildElement,
             );
             $this->validateAttributes($toXmlElementChild, $fromXmlChildElement, $fileName);
             $this->validateSchemasRecursive($toXmlElementChild, $fromXmlChildElement, $fileName);
@@ -248,7 +248,7 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
      */
     protected function anonymizeNameIfNeeded($elementName): string
     {
-        if (empty($elementName) || is_array($elementName)) {
+        if (!$elementName || is_array($elementName)) {
             $elementName = 'anonymous_' . $this->utilTextService->generateRandomString(32);
         }
 
@@ -290,7 +290,7 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
                 $key,
                 $fileName,
                 (string)$toXmlAttributes[$key],
-                $value
+                $value,
             ));
         }
     }
