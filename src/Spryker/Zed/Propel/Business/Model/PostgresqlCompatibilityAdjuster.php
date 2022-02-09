@@ -114,7 +114,6 @@ class PostgresqlCompatibilityAdjuster implements PostgresqlCompatibilityAdjuster
             if ($xpath->query('id-method-parameter', $column->parentNode)->length > 0) {
                 continue;
             }
-            /** @var \DOMElement $tableName */
             $tableName = $column->parentNode->attributes['name'];
             $sequenceName = $tableName->nodeValue . '_pk_seq';
             $idParamElement = $dom->createElement('id-method-parameter');

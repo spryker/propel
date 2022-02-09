@@ -10,7 +10,7 @@ namespace Spryker\Zed\Propel\Business\Model;
 interface PropelGroupedSchemaFinderInterface
 {
     /**
-     * @return array<string, array<\Symfony\Component\Finder\SplFileInfo>>
+     * @return array<string, array>
      */
     public function getGroupedSchemaFiles();
 }
