@@ -39,6 +39,12 @@
             "SprykerTest\\": "tests/SprykerTest/"
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/spryker/propel-orm.git"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
