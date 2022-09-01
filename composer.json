@@ -11,7 +11,7 @@
         "spryker/kernel": "^3.48.0",
         "spryker/log": "^3.0.0",
         "spryker/monolog": "^2.0.0",
-        "spryker/propel-orm": "^1.14.2",
+        "spryker/propel-orm": "^1.14.1",
         "spryker/symfony": "^3.0.0",
         "spryker/transfer": "^3.12.0",
         "spryker/util-encoding": "^2.0.0",
@@ -39,21 +39,6 @@
             "SprykerTest\\": "tests/SprykerTest/"
         }
     },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "spryker/propel-orm",
-                "version": "1.14.2",
-                "type": "spryker/propel-orm",
-                "source": {
-                    "url": "https://github.com/spryker/propel-orm.git",
-                    "type": "git",
-                    "reference": "beta/1_14_1_lazy_table_map_instantiation"
-                }
-            }
-        }
-    ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
