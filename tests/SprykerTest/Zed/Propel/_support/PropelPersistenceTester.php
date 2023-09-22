@@ -35,7 +35,7 @@ use Throwable;
  * @method void comment($description)
  * @method void pause()
  *
- * @SuppressWarnings(PHPMD)
+ * @SuppressWarnings(\SprykerTest\Zed\Propel\PHPMD)
  */
 class PropelPersistenceTester extends Actor
 {
