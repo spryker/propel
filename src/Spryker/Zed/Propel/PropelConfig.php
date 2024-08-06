@@ -258,9 +258,9 @@ class PropelConfig extends AbstractBundleConfig
     /**
      * @api
      *
-     * @return array<string>
+     * @return array<string, array<string>>
      */
-    public function getWhitelistForAllowedAttributeValueChanges()
+    public function getWhitelistForAllowedAttributeValueChanges(): array
     {
         return [];
     }
