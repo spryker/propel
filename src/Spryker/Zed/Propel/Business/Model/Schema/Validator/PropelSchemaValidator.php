@@ -288,8 +288,9 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
 
         if ($this->isAttributeValueChange($toXmlAttributes, $key, $value) && !$this->isWhiteListed($fileName, $key)) {
             $this->addError(sprintf(
-                'The attribute "%s" in one of your "%s" files has currently "%s" as value, if you would run the schema merger, this value would be overwritten with "%s". This can have weird side effects!',
+                'The attribute "%s" in element "%s" in one of your "%s" files has currently "%s" as value, if you would run the schema merger, this value would be overwritten with "%s". This can have weird side effects!',
                 $key,
+                (string)$toXmlElement['name'],
                 $fileName,
                 (string)$toXmlAttributes[$key],
                 $value,
