@@ -79,6 +79,9 @@ class PropelFacadeTest extends Unit
         $this->tester->mockConfigMethod('getSchemaDirectory', function () use ($schemaDirectory) {
             return $schemaDirectory;
         });
+        $this->tester->mockConfigMethod('getProjectPropelSchemaPathPatterns', function () {
+            return [APPLICATION_SOURCE_DIR . '/Pyz/*/src/Pyz/Zed/*/Persistence/Propel/Schema/'];
+        });
 
         $this->tester->getFacade()->copySchemaFilesToTargetDirectory();
         $this->assertTrue(is_dir($schemaDirectory));
