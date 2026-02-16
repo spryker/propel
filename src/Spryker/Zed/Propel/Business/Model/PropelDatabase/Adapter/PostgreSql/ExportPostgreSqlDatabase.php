@@ -112,6 +112,7 @@ class ExportPostgreSqlDatabase implements ExportDatabaseInterface
     protected function getProcess($command)
     {
         // Shim for Symfony 3.x, to be removed when Symfony dependency becomes 4.2+
+        // @phpstan-ignore function.alreadyNarrowedType (BC for supporting Symfony 3.x)
         if (!method_exists(Process::class, 'fromShellCommandline')) {
             return new Process([$command], null, $this->getEnvironmentVariables());
         }

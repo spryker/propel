@@ -154,9 +154,9 @@ class ForeignKeyIndexPropelSchemaElementFilterPlugin extends AbstractPlugin impl
      */
     protected function isFkIndexInFkFieldNameList(string $nameAttribute, array $fkFieldNames): bool
     {
-        /** @var int $startPosition */
+        /** @var int<0, max>|false $startPosition */
         $startPosition = strpos($nameAttribute, 'fk_');
-        $fieldName = mb_substr($nameAttribute, $startPosition);
+        $fieldName = mb_substr($nameAttribute, $startPosition !== false ? $startPosition : 0);
 
         return in_array($fieldName, $fkFieldNames, true);
     }

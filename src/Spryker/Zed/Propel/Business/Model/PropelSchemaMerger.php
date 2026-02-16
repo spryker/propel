@@ -241,10 +241,10 @@ class PropelSchemaMerger implements PropelSchemaMergerInterface
         $this->ensureElementHierarchy($dom);
 
         $callback = function ($matches) {
-            /** @var int $multiplier */
+            /** @var float|int<0, max> $multiplier */
             $multiplier = (strlen($matches[1]) / 2) * 4;
 
-            return str_repeat(' ', $multiplier) . '<';
+            return str_repeat(' ', (int)$multiplier) . '<';
         };
 
         /** @var string $domTree */
@@ -400,7 +400,7 @@ class PropelSchemaMerger implements PropelSchemaMergerInterface
      */
     protected function removeChild(SimpleXMLElement $simpleXMLElement, string $childName): void
     {
-        /** @var \DOMNode $childNode */
+        /** @var \DOMAttr|\DOMElement $childNode */
         $childNode = dom_import_simplexml($simpleXMLElement->$childName);
         /** @var \DOMElement $dom */
         $dom = dom_import_simplexml($simpleXMLElement);

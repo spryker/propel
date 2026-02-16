@@ -6,3 +6,5 @@ parameters:
         - '#Cannot access offset .+ on DOMNamedNodeMap\.#'
         -
             identifier: missingType.iterableValue
+        -
+            identifier: trait.unused
