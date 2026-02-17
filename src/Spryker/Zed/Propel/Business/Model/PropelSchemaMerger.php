@@ -241,7 +241,7 @@ class PropelSchemaMerger implements PropelSchemaMergerInterface
         $this->ensureElementHierarchy($dom);
 
         $callback = function ($matches) {
-            /** @var float|int<0, max> $multiplier */
+            /** @var int<0, max>|float $multiplier */
             $multiplier = (strlen($matches[1]) / 2) * 4;
 
             return str_repeat(' ', (int)$multiplier) . '<';
