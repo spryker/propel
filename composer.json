@@ -22,6 +22,7 @@
         "spryker/console": "*",
         "spryker/container": "*",
         "spryker/laminas": "*",
+        "spryker/queue": "*",
         "spryker/silex": "*",
         "spryker/testify": "*"
     },
