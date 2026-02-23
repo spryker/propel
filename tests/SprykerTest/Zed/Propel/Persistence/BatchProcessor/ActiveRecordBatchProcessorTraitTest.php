@@ -240,7 +240,9 @@ class ActiveRecordBatchProcessorTraitTest extends Unit
      */
     protected function getActiveRecordBatchProcessor()
     {
-        return $this->getMockForTrait(ActiveRecordBatchProcessorTrait::class);
+        return new class {
+            use ActiveRecordBatchProcessorTrait;
+        };
     }
 
     /**

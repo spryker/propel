@@ -39,6 +39,7 @@ class TableHelper extends Module
      */
     public function createTable(string $name, array $columnsData, string $namespace = ''): Table
     {
+        $this->dropTables();
         $platform = $this->getPlatform();
         $connection = Propel::getConnection();
 

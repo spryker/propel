@@ -32,7 +32,13 @@ suites:
         modules:
             enabled:
                 - \SprykerTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper
+                - \SprykerTest\Client\Testify\Helper\ClientHelper
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+                - \SprykerTest\Zed\Propel\Helper\PropelDatabaseHelper
+                - \SprykerTest\Client\Queue\Helper\QueueHelper
     Communication:
         path: Communication
         actor: PropelCommunicationTester
@@ -42,10 +48,11 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\Environment
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper
+                - \SprykerTest\Client\Testify\Helper\ClientHelper
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Zed\Testify\Helper\CommunicationHelper
                 - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
                 - \SprykerTest\Shared\Propel\Helper\PropelSchemaHelper
-                - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
                 - \SprykerTest\Zed\Console\Helper\ConsoleHelper
                 - \SprykerTest\Zed\Propel\Helper\PropelDatabaseHelper
+                - \SprykerTest\Client\Queue\Helper\QueueHelper

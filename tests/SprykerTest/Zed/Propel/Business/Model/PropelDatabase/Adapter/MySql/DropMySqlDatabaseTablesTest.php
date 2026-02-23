@@ -71,6 +71,6 @@ class DropMySqlDatabaseTablesTest extends Unit
      */
     protected function getConnectionMock(): ConnectionInterface
     {
-        return $this->getMockForAbstractClass(ConnectionInterface::class);
+        return $this->getMockBuilder(ConnectionInterface::class)->getMock();
     }
 }
