@@ -58,6 +58,8 @@ class PropelApplicationPlugin extends AbstractPlugin implements ApplicationPlugi
             /** @var \Propel\Runtime\Connection\ConnectionWrapper $connection */
             $connection = Propel::getConnection();
             $connection->useDebug(true);
+
+            $connection->setLogger($this->getFactory()->createPropelInMemoryLogger());
         }
 
         return $container;

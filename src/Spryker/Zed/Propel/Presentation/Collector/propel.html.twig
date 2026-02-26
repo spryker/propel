@@ -1,0 +1,162 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% set queryThresholds = { 'yellow': 50, 'red': 300 } %}
+    {% set totalQueryCount = collector.totalQueryCount %}
+    {% set totalUniqueQueryCount = collector.totalUniqueQueryCount %}
+    {% set icon %}
+        <div{% if totalQueryCount > queryThresholds.red %} style="background-color: #8B4343; padding: 0px 4px;"{% elseif totalQueryCount > queryThresholds.yellow %} style="background-color: #A46A1F; padding: 0px 4px;"{% endif %}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#AAA" d="M12 3C7.58 3 4 4.79 4 7s3.58 4 8 4 8-1.79 8-4-3.58-4-8-4zM4 9v3c0 2.21 3.58 4 8 4s8-1.79 8-4V9c0 2.21-3.58 4-8 4s-8-1.79-8-4zm0 5v3c0 2.21 3.58 4 8 4s8-1.79 8-4v-3c0 2.21-3.58 4-8 4s-8-1.79-8-4z"/></svg>
+            <span class="sf-toolbar-value">{{ totalQueryCount }}</span>
+        </div>
+    {% endset %}
+
+    {% set text %}
+        <div class="sf-toolbar-info-piece">
+            <b>Queries</b>
+            <span class="sf-toolbar-status">{{ totalQueryCount }}</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Unique</b>
+            <span>{{ totalUniqueQueryCount }}</span>
+        </div>
+        {% if totalQueryCount > totalUniqueQueryCount %}
+            <div class="sf-toolbar-info-piece">
+                <b>Duplicates</b>
+                <span class="sf-toolbar-status sf-toolbar-status-yellow">{{ totalQueryCount - totalUniqueQueryCount }}</span>
+            </div>
+        {% endif %}
+    {% endset %}
+
+    {% include '@WebProfiler/Profiler/toolbar_item.html.twig' with { 'link': profiler_url } %}
+{% endblock %}
+
+{% block menu %}
+    {% set queryThresholds = { 'yellow': 50, 'red': 300 } %}
+    {% set totalQueryCount = collector.totalQueryCount %}
+    {% set totalUniqueQueryCount = collector.totalUniqueQueryCount %}
+    <span class="label {% if totalQueryCount > queryThresholds.red %}label-status-error{% elseif totalQueryCount > queryThresholds.yellow %}label-status-warning{% elseif totalQueryCount > totalUniqueQueryCount %}label-status-warning{% endif %}">
+        <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#AAA" d="M12 3C7.58 3 4 4.79 4 7s3.58 4 8 4 8-1.79 8-4-3.58-4-8-4zM4 9v3c0 2.21 3.58 4 8 4s8-1.79 8-4V9c0 2.21-3.58 4-8 4s-8-1.79-8-4zm0 5v3c0 2.21 3.58 4 8 4s8-1.79 8-4v-3c0 2.21-3.58 4-8 4s-8-1.79-8-4z"/></svg>
+        </span>
+        <strong>Propel</strong>
+        <span class="count">
+            <span>{{ totalQueryCount }}</span>
+        </span>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    {% set queryThresholds = { 'yellow': 50, 'red': 300 } %}
+    {% set totalQueryCount = collector.totalQueryCount %}
+    {% set totalUniqueQueryCount = collector.totalUniqueQueryCount %}
+    <style>
+        .propel-sql-table { table-layout: fixed; }
+        .propel-sql-table td { overflow-x: auto; }
+        .propel-sql-table pre { white-space: pre-wrap; word-wrap: break-word; margin: 0; font-size: 12px; }
+        .propel-duplicate { background-color: #fff3cd; }
+        .propel-metrics { display: flex; gap: 30px; margin-bottom: 20px; }
+        .propel-metric { text-align: center; }
+        .propel-metric .value { display: block; font-size: 28px; font-weight: bold; }
+        .propel-metric .label { display: block; color: #999; }
+        .propel-metric.highlight-yellow { background-color: #A46A1F; border-radius: 4px; padding: 15px; }
+        .propel-metric.highlight-red { background-color: #8B4343; border-radius: 4px; padding: 15px; color: white; }
+    </style>
+
+    <h2>Propel SQL Queries</h2>
+
+    <div class="propel-metrics">
+        <div class="propel-metric{% if totalQueryCount > queryThresholds.red %} highlight-red{% elseif totalQueryCount > queryThresholds.yellow %} highlight-yellow{% endif %}">
+            <span class="value">{{ totalQueryCount }}</span>
+            <span class="label">Total Queries</span>
+        </div>
+        <div class="propel-metric">
+            <span class="value">{{ totalUniqueQueryCount }}</span>
+            <span class="label">Unique Queries</span>
+        </div>
+        <div class="propel-metric">
+            <span class="value">{{ totalQueryCount - totalUniqueQueryCount }}</span>
+            <span class="label">Duplicate Executions</span>
+        </div>
+    </div>
+
+    {% if collector.queries is not empty %}
+        <table class="propel-sql-table">
+            <colgroup>
+                <col style="width: 8%">
+                <col style="width: 92%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>Count</th>
+                    <th>SQL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for query in collector.queries %}
+                    <tr{% if query.count > 1 %} class="propel-duplicate"{% endif %}>
+                        <td>{{ query.count }}</td>
+                        <td><pre>{{ query.sql }}</pre></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="empty">
+            <p>No SQL queries were collected. To enable Propel query logging, set configuration: <code>config/Shared/config_local.php</code>:</p>
+            <pre><code>$config[\Spryker\Shared\Propel\PropelConstants::PROPEL_DEBUG] = true;</code></pre>
+        </div>
+    {% endif %}
+
+    {% if collector.segmentedQueries is not empty %}
+        <h2 style="margin-top: 40px;">Segmented SQL Queries</h2>
+        <p style="color: #999; margin-bottom: 20px;">Queries captured using PropelInMemoryLogger::startSegment() / endSegment()</p>
+
+        {% for segmentKey, segmentData in collector.segmentedQueries %}
+            <details style="margin-bottom: 30px; border: 1px solid #ddd; padding: 15px; border-radius: 4px;" open>
+                <summary style="cursor: pointer; font-weight: bold; font-size: 16px; margin-bottom: 15px;">
+                    Segment: <code>{{ segmentKey }}</code>
+                    <span style="color: #999; font-weight: normal; margin-left: 10px;">
+                        ({{ segmentData.queryCount }} queries, {{ segmentData.uniqueQueryCount }} unique)
+                    </span>
+                </summary>
+
+                <div class="propel-metrics" style="margin-bottom: 15px;">
+                    <div class="propel-metric{% if segmentData.queryCount > queryThresholds.red %} highlight-red{% elseif segmentData.queryCount > queryThresholds.yellow %} highlight-yellow{% endif %}">
+                        <span class="value">{{ segmentData.queryCount }}</span>
+                        <span class="label">Total Queries</span>
+                    </div>
+                    <div class="propel-metric">
+                        <span class="value">{{ segmentData.uniqueQueryCount }}</span>
+                        <span class="label">Unique Queries</span>
+                    </div>
+                    <div class="propel-metric">
+                        <span class="value">{{ segmentData.queryCount - segmentData.uniqueQueryCount }}</span>
+                        <span class="label">Duplicate Executions</span>
+                    </div>
+                </div>
+
+                <table class="propel-sql-table">
+                    <colgroup>
+                        <col style="width: 8%">
+                        <col style="width: 92%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Count</th>
+                            <th>SQL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for query in segmentData.queries %}
+                            <tr{% if query.count > 1 %} class="propel-duplicate"{% endif %}>
+                                <td>{{ query.count }}</td>
+                                <td><pre>{{ query.sql }}</pre></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </details>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

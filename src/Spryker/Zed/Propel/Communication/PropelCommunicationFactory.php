@@ -10,6 +10,8 @@ namespace Spryker\Zed\Propel\Communication;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Spryker\Shared\Log\LoggerTrait;
+use Spryker\Shared\Propel\DataCollector\PropelDataCollector;
+use Spryker\Shared\Propel\Logger\PropelInMemoryLogger;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use Spryker\Zed\Propel\Communication\Command\Config\PropelCommandConfigurator;
 use Spryker\Zed\Propel\Communication\Command\Config\PropelCommandConfiguratorInterface;
@@ -59,6 +61,18 @@ class PropelCommunicationFactory extends AbstractCommunicationFactory
         }
 
         return $loggers;
+    }
+
+    public function createPropelInMemoryLogger(): PropelInMemoryLogger
+    {
+        return new PropelInMemoryLogger();
+    }
+
+    public function createPropelDataCollector(): PropelDataCollector
+    {
+        return new PropelDataCollector(
+            $this->createPropelInMemoryLogger(),
+        );
     }
 
     /**
