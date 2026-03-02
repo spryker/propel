@@ -36,9 +36,6 @@ class MigrationCheckConsoleTest extends Unit
      */
     protected PropelCommunicationTester $tester;
 
-    /**
-     * @return void
-     */
     public function testExecuteShouldReturnStatusCodeErrorWhileNoMigrationFileGotFound(): void
     {
         // Arrange
@@ -62,9 +59,6 @@ class MigrationCheckConsoleTest extends Unit
         $this->assertStringContainsString('No migration file found in "' . codecept_data_dir() . '".', $display);
     }
 
-    /**
-     * @return void
-     */
     public function testExecuteShouldReturnStatusCodeSuccessWhileMigrationFileGotFound(): void
     {
         // Arrange
@@ -93,9 +87,6 @@ class MigrationCheckConsoleTest extends Unit
         $this->assertStringContainsString('Call the "migrate" task to execute it', $display);
     }
 
-    /**
-     * @return void
-     */
     public function testExecuteShouldReturnTheLastMigrationVersionWhenLastVersionOptionIsProvided(): void
     {
         // Arrange
@@ -115,9 +106,6 @@ class MigrationCheckConsoleTest extends Unit
         $this->assertStringContainsString($version, $display);
     }
 
-    /**
-     * @return void
-     */
     public function testExecuteShouldReturnEmptyWhenLastVersionOptionIsProvidedAndMigrationsWereNotExecuted(): void
     {
         // Arrange

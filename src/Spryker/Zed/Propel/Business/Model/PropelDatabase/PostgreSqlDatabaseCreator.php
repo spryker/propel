@@ -20,9 +20,6 @@ class PostgreSqlDatabaseCreator implements DatabaseCreatorInterface
      */
     protected $config;
 
-    /**
-     * @param \Spryker\Zed\Propel\PropelConfig $config
-     */
     public function __construct(PropelConfig $config)
     {
         $this->config = $config;

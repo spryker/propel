@@ -26,17 +26,11 @@ class PropelSchemaXmlNameValidator implements PropelSchemaXmlValidatorInterface
      */
     protected $schemaValidationTransfer;
 
-    /**
-     * @param \Spryker\Zed\Propel\Business\Model\PropelSchemaFinderInterface $schemaFinder
-     */
     public function __construct(PropelSchemaFinderInterface $schemaFinder)
     {
         $this->schemaFinder = $schemaFinder;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\SchemaValidationTransfer
-     */
     public function validate(): SchemaValidationTransfer
     {
         $schemaFiles = $this->getSchemaFiles();
@@ -85,11 +79,6 @@ class PropelSchemaXmlNameValidator implements PropelSchemaXmlValidatorInterface
         return $invalidIdIdentifiers;
     }
 
-    /**
-     * @param \Symfony\Component\Finder\SplFileInfo $file
-     *
-     * @return array
-     */
     protected function findInvalidIdentifiers(SplFileInfo $file): array
     {
         $xml = new SimpleXMLElement($file->getContents());
@@ -116,21 +105,11 @@ class PropelSchemaXmlNameValidator implements PropelSchemaXmlValidatorInterface
         return $fileNames;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
     protected function isLongerThanIdentifierMaxLength(string $name): bool
     {
         return (mb_strlen($name) > PropelConfig::POSTGRES_INDEX_NAME_MAX_LENGTH);
     }
 
-    /**
-     * @param string $message
-     *
-     * @return void
-     */
     protected function addError(string $message): void
     {
         $schemaValidationErrorTransfer = new SchemaValidationErrorTransfer();
@@ -141,9 +120,6 @@ class PropelSchemaXmlNameValidator implements PropelSchemaXmlValidatorInterface
         $schemaValidationTransfer->addValidationError($schemaValidationErrorTransfer);
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\SchemaValidationTransfer
-     */
     protected function getSchemaValidationTransfer(): SchemaValidationTransfer
     {
         if (!$this->schemaValidationTransfer) {

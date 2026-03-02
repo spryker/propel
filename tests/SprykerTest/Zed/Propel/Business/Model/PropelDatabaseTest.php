@@ -26,9 +26,6 @@ use Spryker\Zed\Propel\Business\Model\PropelDatabase\DatabaseCreatorInterface;
  */
 class PropelDatabaseTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testInitialization(): void
     {
         $databaseCreatorCollectionMock = $this->getMockBuilder(DatabaseCreatorCollectionInterface::class)->getMock();
@@ -36,9 +33,6 @@ class PropelDatabaseTest extends Unit
         $this->assertInstanceOf(PropelDatabase::class, new PropelDatabase($databaseCreatorCollectionMock));
     }
 
-    /**
-     * @return void
-     */
     public function testCreateIfNotExists(): void
     {
         $databaseCreatorMock = $this->getMockBuilder(DatabaseCreatorInterface::class)->onlyMethods(['createIfNotExists', 'getEngine'])->getMock();
@@ -52,9 +46,6 @@ class PropelDatabaseTest extends Unit
         $propelDatabase->createDatabaseIfNotExists();
     }
 
-    /**
-     * @return void
-     */
     public function testCreateIfNotExistsThrowsException(): void
     {
         $this->expectException(DatabaseCreatorNotFoundException::class);

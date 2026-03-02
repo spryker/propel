@@ -30,9 +30,6 @@ class AdapterFactory implements AdapterFactoryInterface
      */
     protected $config;
 
-    /**
-     * @param \Spryker\Zed\Propel\PropelConfig $config
-     */
     public function __construct(PropelConfig $config)
     {
         $this->config = $config;
@@ -146,25 +143,16 @@ class AdapterFactory implements AdapterFactoryInterface
         return new ImportPostgreSqlDatabase($this->config);
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Business\Model\PropelDatabase\Command\DropDatabaseTablesInterface
-     */
     public function createDropPostgreSqlDatabaseTablesCommand(): DropDatabaseTablesInterface
     {
         return new DropPostgreSqlDatabaseTables();
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Business\Model\PropelDatabase\Command\DropDatabaseTablesInterface
-     */
     public function createDropMySqlDatabaseTablesCommand(): DropDatabaseTablesInterface
     {
         return new DropMySqlDatabaseTables();
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Business\Model\PropelDatabase\Command\TableExistenceInterface
-     */
     protected function createPostgreSqlTableExistenceCommand(): TableExistenceInterface
     {
         return new TableExistencePostgreSqlDatabase();

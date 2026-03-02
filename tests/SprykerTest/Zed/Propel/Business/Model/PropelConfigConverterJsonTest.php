@@ -36,9 +36,6 @@ class PropelConfigConverterJsonTest extends Unit
      */
     protected $fixtureDirectory;
 
-    /**
-     * @return void
-     */
     public function setUp(): void
     {
         $this->fixtureDirectory = $this->getFixtureDirectory();
@@ -54,17 +51,11 @@ class PropelConfigConverterJsonTest extends Unit
         }
     }
 
-    /**
-     * @return string
-     */
     protected function getFixtureDirectory(): string
     {
         return __DIR__ . '/Fixtures/Config/';
     }
 
-    /**
-     * @return array
-     */
     protected function getTestConfiguration(): array
     {
         return [
@@ -79,9 +70,6 @@ class PropelConfigConverterJsonTest extends Unit
         ];
     }
 
-    /**
-     * @return void
-     */
     public function testInitialization(): void
     {
         $propelConfigConverterJson = new PropelConfigConverterJson($this->getTestConfiguration());
@@ -89,18 +77,12 @@ class PropelConfigConverterJsonTest extends Unit
         $this->assertInstanceOf(PropelConfigConverterJson::class, $propelConfigConverterJson);
     }
 
-    /**
-     * @return void
-     */
     public function testInitializationThrowsExceptionWhenDataIsMissing(): void
     {
         $this->expectException(ConfigMissingPropertyException::class);
         new PropelConfigConverterJson([]);
     }
 
-    /**
-     * @return void
-     */
     public function testInitializationCreatesTargetDirectory(): void
     {
         $this->assertFalse(is_dir($this->getFixtureDirectory()));
@@ -110,9 +92,6 @@ class PropelConfigConverterJsonTest extends Unit
         $this->assertTrue(is_dir($this->getFixtureDirectory()));
     }
 
-    /**
-     * @return void
-     */
     public function testConvertConfig(): void
     {
         $this->assertFalse(file_exists($this->fixtureDirectory . static::FILE_NAME));
@@ -123,9 +102,6 @@ class PropelConfigConverterJsonTest extends Unit
         $this->assertTrue(file_exists($this->fixtureDirectory . static::FILE_NAME));
     }
 
-    /**
-     * @return void
-     */
     public function testConvertConfigThrowsExceptionIfFileNotCreated(): void
     {
         $this->assertFalse(file_exists($this->fixtureDirectory . static::FILE_NAME));

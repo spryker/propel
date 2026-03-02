@@ -27,19 +27,11 @@ class PropelCommandConfigurator implements PropelCommandConfiguratorInterface
      */
     protected $propelConfig;
 
-    /**
-     * @param \Spryker\Zed\Propel\PropelConfig $propelConfig
-     */
     public function __construct(PropelConfig $propelConfig)
     {
         $this->propelConfig = $propelConfig;
     }
 
-    /**
-     * @param \Spryker\Zed\PropelOrm\Communication\Generator\ConfigurablePropelCommandInterface $configurablePropelCommand
-     *
-     * @return void
-     */
     public function configurePropelCommand(ConfigurablePropelCommandInterface $configurablePropelCommand): void
     {
         $configurablePropelCommand->setPropelConfig($this->buildPropelConfig());

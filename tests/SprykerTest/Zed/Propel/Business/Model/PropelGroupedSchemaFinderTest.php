@@ -28,9 +28,6 @@ class PropelGroupedSchemaFinderTest extends AbstractPropelSchemaTest
      */
     public const NAME_OF_SCHEMA_FILE_GROUP = 'spy_foo.schema.xml';
 
-    /**
-     * @return void
-     */
     public function testGetSchemasShouldReturnArrayWithOneEntryGroupedByFileNameIfFileWithSameNameOnlyExistsOnce(): void
     {
         $schemaFinder = new PropelSchemaFinder(
@@ -47,9 +44,6 @@ class PropelGroupedSchemaFinderTest extends AbstractPropelSchemaTest
         $this->assertCount(1, $groupedSchemaFiles[static::NAME_OF_SCHEMA_FILE_GROUP]);
     }
 
-    /**
-     * @return void
-     */
     public function testGetSchemasShouldReturnArrayWithTwoEntriesGroupedByFileNameIfFileWithSameNameExistsMoreThenOnce(): void
     {
         $subDirectory = $this->getFixtureDirectory() . DIRECTORY_SEPARATOR . 'subDir';

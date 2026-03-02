@@ -26,10 +26,6 @@ class PropelCommandRunner implements PropelCommandRunnerInterface
      */
     protected $propelCommandConfigurator;
 
-    /**
-     * @param \Spryker\Zed\Propel\Communication\Command\Input\PropelCommandInputBuilderInterface $inputBuilder
-     * @param \Spryker\Zed\Propel\Communication\Command\Config\PropelCommandConfiguratorInterface $propelCommandConfigurator
-     */
     public function __construct(
         PropelCommandInputBuilderInterface $inputBuilder,
         PropelCommandConfiguratorInterface $propelCommandConfigurator

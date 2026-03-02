@@ -38,34 +38,22 @@ class PropelSchemaTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function tearDown(): void
     {
         $filesystem = new Filesystem();
         $filesystem->remove($this->getFixtureTargetDirectory());
     }
 
-    /**
-     * @return string
-     */
     private function getFixtureDirectory(): string
     {
         return __DIR__ . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR . 'PropelSchema';
     }
 
-    /**
-     * @return string
-     */
     private function getFixtureTargetDirectory(): string
     {
         return $this->getFixtureDirectory() . DIRECTORY_SEPARATOR . 'Target';
     }
 
-    /**
-     * @return void
-     */
     public function testCopyShouldCopyFileFromSourceToTargetDirectoryWithoutMergingIfOnlyOneFileBySchemaNameExist(): void
     {
         $finder = new PropelSchemaFinder([$this->getFixtureDirectory()]);
@@ -80,9 +68,6 @@ class PropelSchemaTest extends Unit
         $this->assertTrue(file_exists($this->getFixtureTargetDirectory() . DIRECTORY_SEPARATOR . 'foo_foo.schema.xml'));
     }
 
-    /**
-     * @return void
-     */
     public function testCopyShouldMergeAndCopyFileFromSourceToTargetDirectoryIfMoreThenOneFileBySchemaNameExist(): void
     {
         $finder = new PropelSchemaFinder([
@@ -100,9 +85,6 @@ class PropelSchemaTest extends Unit
         $this->assertTrue(file_exists($this->getFixtureTargetDirectory() . DIRECTORY_SEPARATOR . 'foo_bar.schema.xml'));
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Business\Model\PropelSchemaMergerInterface
-     */
     protected function createPropelSchemaMerger(): PropelSchemaMergerInterface
     {
         return new PropelSchemaMerger(

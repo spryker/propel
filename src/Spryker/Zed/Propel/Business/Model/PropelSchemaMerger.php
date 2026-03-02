@@ -55,11 +55,6 @@ class PropelSchemaMerger implements PropelSchemaMergerInterface
      */
     protected $schemaElementFilter;
 
-    /**
-     * @param \Spryker\Zed\Propel\Dependency\Service\PropelToUtilTextServiceInterface $utilTextService
-     * @param \Spryker\Zed\Propel\Business\SchemaElementFilter\SchemaElementFilterInterface $schemaElementFilter
-     * @param \Spryker\Zed\Propel\PropelConfig|null $config
-     */
     public function __construct(
         PropelToUtilTextServiceInterface $utilTextService,
         SchemaElementFilterInterface $schemaElementFilter,
@@ -192,11 +187,6 @@ class PropelSchemaMerger implements PropelSchemaMergerInterface
         return $mergeSourceXmlElements;
     }
 
-    /**
-     * @param string $fileName
-     *
-     * @return string
-     */
     protected function getSourceFromFilePath(string $fileName): string
     {
         if (strpos($fileName, DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR) !== false) {
@@ -329,13 +319,6 @@ class PropelSchemaMerger implements PropelSchemaMergerInterface
         return $this->hasConfig() && $this->config->allowIndexOverriding() && $childName === 'index' && isset($toXmlElement->$childName) && $source === static::SOURCE_PROJECT;
     }
 
-    /**
-     * @param \SimpleXMLElement $firstXmlElement
-     * @param \SimpleXMLElement $secondXmlElement
-     * @param string $attributeName
-     *
-     * @return bool
-     */
     protected function haveSameAttribute(SimpleXMLElement $firstXmlElement, SimpleXMLElement $secondXmlElement, string $attributeName): bool
     {
         if (!isset($firstXmlElement->attributes()[$attributeName]) || !isset($secondXmlElement->attributes()[$attributeName])) {
@@ -392,12 +375,6 @@ class PropelSchemaMerger implements PropelSchemaMergerInterface
         return $elementName;
     }
 
-    /**
-     * @param \SimpleXMLElement $simpleXMLElement
-     * @param string $childName
-     *
-     * @return void
-     */
     protected function removeChild(SimpleXMLElement $simpleXMLElement, string $childName): void
     {
         /** @var \DOMAttr|\DOMElement $childNode */
@@ -430,11 +407,6 @@ class PropelSchemaMerger implements PropelSchemaMergerInterface
         return $toXmlElement;
     }
 
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @return void
-     */
     protected function ensureElementHierarchy(DOMDocument $dom): void
     {
         foreach ($dom->getElementsByTagName('table') as $tableDomElement) {
@@ -442,11 +414,6 @@ class PropelSchemaMerger implements PropelSchemaMergerInterface
         }
     }
 
-    /**
-     * @param \DOMElement $tableDomElement
-     *
-     * @return void
-     */
     protected function ensureTableElementHierarchy(DOMElement $tableDomElement): void
     {
         $elementHierarchy = ['unique', 'foreign-key'];

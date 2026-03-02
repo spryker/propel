@@ -29,9 +29,6 @@ class PropelCommunicationTester extends Actor
 {
     use _generated\PropelCommunicationTesterActions;
 
-    /**
-     * @return \Symfony\Component\Console\Tester\CommandTester
-     */
     public function getMigrationCheckConsoleCommandTester(): CommandTester
     {
         $factory = $this->getFactory();

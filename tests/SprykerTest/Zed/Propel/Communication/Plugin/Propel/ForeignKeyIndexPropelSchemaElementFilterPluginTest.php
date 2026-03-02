@@ -81,9 +81,6 @@ class ForeignKeyIndexPropelSchemaElementFilterPluginTest extends Unit
         $this->assertSame($expected, $this->tester->formatXml($schemaXmlElement->asXML()));
     }
 
-    /**
-     * @return array
-     */
     public function filterDataProvider(): array
     {
         return [
@@ -93,11 +90,6 @@ class ForeignKeyIndexPropelSchemaElementFilterPluginTest extends Unit
         ];
     }
 
-    /**
-     * @param string $fileName
-     *
-     * @return string
-     */
     protected function getFixturesPathToFile(string $fileName): string
     {
         $pathParts = [

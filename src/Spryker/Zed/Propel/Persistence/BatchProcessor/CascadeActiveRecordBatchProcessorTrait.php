@@ -20,19 +20,11 @@ trait CascadeActiveRecordBatchProcessorTrait
      */
     protected static array $entityList = [];
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     *
-     * @return void
-     */
     public function sharedPersist(ActiveRecordInterface $entity): void
     {
         static::$entityList[] = $entity;
     }
 
-    /**
-     * @return bool
-     */
     public function recursiveCommit(): bool
     {
         if (!static::$entityList) {

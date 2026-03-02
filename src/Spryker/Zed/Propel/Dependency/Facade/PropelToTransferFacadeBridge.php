@@ -34,9 +34,6 @@ class PropelToTransferFacadeBridge implements PropelToTransferFacadeInterface
         $this->transferFacade->generateEntityTransferObjects($messenger);
     }
 
-    /**
-     * @return void
-     */
     public function deleteGeneratedEntityTransferObjects(): void
     {
         $this->transferFacade->deleteGeneratedEntityTransferObjects();

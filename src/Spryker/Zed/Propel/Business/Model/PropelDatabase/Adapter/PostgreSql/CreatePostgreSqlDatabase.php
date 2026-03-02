@@ -27,9 +27,6 @@ class CreatePostgreSqlDatabase implements CreateDatabaseInterface
      */
     protected $config;
 
-    /**
-     * @param \Spryker\Zed\Propel\PropelConfig $config
-     */
     public function __construct(PropelConfig $config)
     {
         $this->config = $config;
@@ -140,11 +137,6 @@ class CreatePostgreSqlDatabase implements CreateDatabaseInterface
         return (bool)$returnValue;
     }
 
-    /**
-     * @param string $command
-     *
-     * @return \Symfony\Component\Process\Process
-     */
     protected function getProcess(string $command): Process
     {
         return Process::fromShellCommandline($command);

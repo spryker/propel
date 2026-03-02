@@ -44,9 +44,6 @@ class PropelApplicationPluginTest extends Unit
      */
     protected $writeConnection;
 
-    /**
-     * @return void
-     */
     protected function _setUp(): void
     {
         parent::_setUp();
@@ -55,18 +52,12 @@ class PropelApplicationPluginTest extends Unit
         $this->writeConnection = Propel::getWriteConnection(static::DEFAULT_DATA_SOURCE_NAME);
     }
 
-    /**
-     * @return void
-     */
     public function testPropelHasEstablishedReadAndWriteConnections(): void
     {
         $this->assertSame(static::DEFAULT_DATA_SOURCE_NAME, $this->readConnection->getName());
         $this->assertSame(static::DEFAULT_DATA_SOURCE_NAME, $this->writeConnection->getName());
     }
 
-    /**
-     * @return void
-     */
     public function testPropelConnectionManager(): void
     {
         $createTableQuery = 'CREATE TABLE IF NOT EXISTS spy_test_propel (id_test_propel INT NOT NULL, PRIMARY KEY (id_test_propel));';

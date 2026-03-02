@@ -22,9 +22,6 @@ class PropelDatabase implements PropelDatabaseInterface
      */
     protected $databaseCreatorCollection;
 
-    /**
-     * @param \Spryker\Zed\Propel\Business\Model\PropelDatabase\DatabaseCreatorCollectionInterface $databaseCreatorCollection
-     */
     public function __construct(DatabaseCreatorCollectionInterface $databaseCreatorCollection)
     {
         $this->databaseCreatorCollection = $databaseCreatorCollection;

@@ -19,9 +19,6 @@ use Throwable;
 
 class TransactionHelper extends Module
 {
-    /**
-     * @return void
-     */
     public function _initialize(): void
     {
         Propel::disableInstancePooling();
@@ -47,11 +44,6 @@ class TransactionHelper extends Module
         $propelServiceProvider->boot(new Application());
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         parent::_before($test);
@@ -69,11 +61,6 @@ class TransactionHelper extends Module
         Propel::getWriteConnection('zed')->beginTransaction();
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _after(TestInterface $test): void
     {
         parent::_after($test);
@@ -81,9 +68,6 @@ class TransactionHelper extends Module
         Propel::getWriteConnection('zed')->forceRollBack();
     }
 
-    /**
-     * @return void
-     */
     public function _afterSuite(): void
     {
         Propel::closeConnections();

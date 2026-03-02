@@ -12,11 +12,6 @@ use Spryker\Zed\Propel\Business\Model\PropelDatabase\Command\TableExistenceInter
 
 class TableExistencePostgreSqlDatabase implements TableExistenceInterface
 {
-    /**
-     * @param string $tableName
-     *
-     * @return bool
-     */
     public function tableExists(string $tableName): bool
     {
         $connection = Propel::getConnection();

@@ -43,9 +43,6 @@ class PropelSchemaMergerTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testMergeTwoSchemaFilesMustReturnStringWithMergedContent(): void
     {
         $filesToMerge = [
@@ -60,9 +57,6 @@ class PropelSchemaMergerTest extends Unit
         $this->assertSame($expected, $content);
     }
 
-    /**
-     * @return void
-     */
     public function testMergeMoreThanTwoSchemaFilesMustReturnStringWithMergedContent(): void
     {
         $filesToMerge = [
@@ -77,9 +71,6 @@ class PropelSchemaMergerTest extends Unit
         $this->assertSame($expected, $content);
     }
 
-    /**
-     * @return void
-     */
     public function testMergeAllowsToChangeAttributeValue(): void
     {
         $filesToMerge = [
@@ -94,9 +85,6 @@ class PropelSchemaMergerTest extends Unit
         $this->assertSame($expected, $content);
     }
 
-    /**
-     * @return void
-     */
     public function testMergeSortsElements(): void
     {
         $filesToMerge = [
@@ -112,22 +100,11 @@ class PropelSchemaMergerTest extends Unit
         $this->assertSame($expected, $content);
     }
 
-    /**
-     * @param string $fileName
-     * @param string $level
-     *
-     * @return \Symfony\Component\Finder\SplFileInfo
-     */
     protected function getSplFileInfo(string $fileName, string $level): SplFileInfo
     {
         return new SplFileInfo($this->getFixtureDirectory($level) . $fileName, '', '');
     }
 
-    /**
-     * @param string|null $level
-     *
-     * @return string
-     */
     private function getFixtureDirectory(?string $level = null): string
     {
         $pathParts = [
@@ -143,9 +120,6 @@ class PropelSchemaMergerTest extends Unit
         return implode(DIRECTORY_SEPARATOR, $pathParts) . DIRECTORY_SEPARATOR;
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Business\Model\PropelSchemaMergerInterface
-     */
     protected function createPropelSchemaMerger(): PropelSchemaMergerInterface
     {
         return new PropelSchemaMerger(

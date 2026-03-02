@@ -25,9 +25,6 @@ use Spryker\Zed\Propel\PropelConfig;
  */
 class PostgreSqlDatabaseCreatorTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testGetEngine(): void
     {
         $postgreSqlDatabaseCreator = new PostgreSqlDatabaseCreator(
@@ -37,9 +34,6 @@ class PostgreSqlDatabaseCreatorTest extends Unit
         $this->assertSame(PropelConfig::DB_ENGINE_PGSQL, $postgreSqlDatabaseCreator->getEngine());
     }
 
-    /**
-     * @return void
-     */
     public function testCreateWithNotExistingDatabase(): void
     {
         $postgreSqlDatabaseCreatorMock = $this->getPostgreSqlDatabaseCreatorMock(['existsDatabase', 'createDatabase']);
@@ -49,9 +43,6 @@ class PostgreSqlDatabaseCreatorTest extends Unit
         $postgreSqlDatabaseCreatorMock->createIfNotExists();
     }
 
-    /**
-     * @return void
-     */
     public function testCreateWithExistingDatabase(): void
     {
         $postgreSqlDatabaseCreatorMock = $this->getPostgreSqlDatabaseCreatorMock(['existsDatabase', 'createDatabase']);

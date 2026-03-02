@@ -65,9 +65,6 @@ class PropelApplicationPlugin extends AbstractPlugin implements ApplicationPlugi
         return $container;
     }
 
-    /**
-     * @return \Propel\Runtime\ServiceContainer\StandardServiceContainer
-     */
     protected function getServiceContainer(): StandardServiceContainer
     {
         /** @var \Propel\Runtime\ServiceContainer\StandardServiceContainer $serviceContainer */
@@ -76,9 +73,6 @@ class PropelApplicationPlugin extends AbstractPlugin implements ApplicationPlugi
         return $serviceContainer;
     }
 
-    /**
-     * @return bool
-     */
     private function hasConnection(): bool
     {
         try {
@@ -113,11 +107,6 @@ class PropelApplicationPlugin extends AbstractPlugin implements ApplicationPlugi
         return !empty($propelDefaultConnectionsConfig['slaves']) ? $propelDefaultConnectionsConfig['slaves'] : null;
     }
 
-    /**
-     * @param \Propel\Runtime\ServiceContainer\StandardServiceContainer $serviceContainer
-     *
-     * @return void
-     */
     private function addLogger(StandardServiceContainer $serviceContainer): void
     {
         $loggerCollection = $this->getFactory()->createLogger();

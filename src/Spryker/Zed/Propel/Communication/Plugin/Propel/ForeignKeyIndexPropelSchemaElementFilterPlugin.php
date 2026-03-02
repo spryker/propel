@@ -82,11 +82,6 @@ class ForeignKeyIndexPropelSchemaElementFilterPlugin extends AbstractPlugin impl
         return $fkFieldNames;
     }
 
-    /**
-     * @param \SimpleXMLElement $uniqueIndexElement
-     *
-     * @return string|null
-     */
     protected function findFirstFkFieldNamesFromUniqueIndex(SimpleXMLElement $uniqueIndexElement): ?string
     {
         foreach ($uniqueIndexElement->children() as $uniqueIndexField) {
@@ -101,11 +96,6 @@ class ForeignKeyIndexPropelSchemaElementFilterPlugin extends AbstractPlugin impl
         return null;
     }
 
-    /**
-     * @param string $fieldName
-     *
-     * @return bool
-     */
     protected function isFkField(string $fieldName): bool
     {
         return strpos($fieldName, 'fk_') === 0;
@@ -135,12 +125,6 @@ class ForeignKeyIndexPropelSchemaElementFilterPlugin extends AbstractPlugin impl
         return $tableXmlElement;
     }
 
-    /**
-     * @param string $tagName
-     * @param string $nameAttribute
-     *
-     * @return bool
-     */
     protected function isFkIndex(string $tagName, string $nameAttribute): bool
     {
         return $tagName === 'index' && strpos($nameAttribute, 'fk_') !== false;

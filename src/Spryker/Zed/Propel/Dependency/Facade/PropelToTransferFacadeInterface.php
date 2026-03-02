@@ -18,8 +18,5 @@ interface PropelToTransferFacadeInterface
      */
     public function generateEntityTransferObjects(LoggerInterface $messenger);
 
-    /**
-     * @return void
-     */
     public function deleteGeneratedEntityTransferObjects(): void;
 }

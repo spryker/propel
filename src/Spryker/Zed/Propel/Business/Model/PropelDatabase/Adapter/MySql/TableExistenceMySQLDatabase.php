@@ -18,19 +18,11 @@ class TableExistenceMySQLDatabase implements TableExistenceInterface
      */
     protected $propelConfig;
 
-    /**
-     * @param \Spryker\Zed\Propel\PropelConfig $propelConfig
-     */
     public function __construct(PropelConfig $propelConfig)
     {
         $this->propelConfig = $propelConfig;
     }
 
-    /**
-     * @param string $tableName
-     *
-     * @return bool
-     */
     public function tableExists(string $tableName): bool
     {
         $connection = Propel::getConnection();

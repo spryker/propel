@@ -33,18 +33,12 @@ class CascadeActiveRecordBatchProcessorTraitTest extends Unit
         return $this->getMockForTrait(CascadeActiveRecordBatchProcessorTrait::class);
     }
 
-    /**
-     * @return \SprykerTest\Zed\Propel\TestCascadeProcessor
-     */
     protected function getTraitTestClass(): TestCascadeProcessor
     {
         // To have a possibility to mock methods in trait
         return new TestCascadeProcessor();
     }
 
-    /**
-     * @return void
-     */
     public function testSharedPersistAddsEntityToEntityList(): void
     {
         // Arrange
@@ -65,9 +59,6 @@ class CascadeActiveRecordBatchProcessorTraitTest extends Unit
         $this->assertSame($mockEntity2, $entityList[1]);
     }
 
-    /**
-     * @return void
-     */
     public function testRecursiveCommitWithEmptyEntityList(): void
     {
         // Arrange
@@ -85,9 +76,6 @@ class CascadeActiveRecordBatchProcessorTraitTest extends Unit
         $this->assertEmpty($batchProcessor->getEntityList());
     }
 
-    /**
-     * @return void
-     */
     public function testRecursiveCommitProcessesEntities(): void
     {
         // Arrange
@@ -125,9 +113,6 @@ class CascadeActiveRecordBatchProcessorTraitTest extends Unit
         $this->assertEmpty($batchProcessor->getEntityList());
     }
 
-    /**
-     * @return void
-     */
     public function testRecursiveCommitHandlesNestedEntities(): void
     {
         // Arrange

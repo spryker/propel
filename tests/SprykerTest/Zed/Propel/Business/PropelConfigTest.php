@@ -23,74 +23,47 @@ use Spryker\Zed\Propel\PropelConfig;
  */
 class PropelConfigTest extends Unit
 {
-    /**
-     * @return \Spryker\Zed\Propel\PropelConfig
-     */
     private function getConfig(): PropelConfig
     {
         return new PropelConfig();
     }
 
-    /**
-     * @return void
-     */
     public function testGetGeneratedDirectoryShouldReturnPathToGeneratedFiles(): void
     {
         $this->assertTrue(is_dir($this->getConfig()->getGeneratedDirectory()));
     }
 
-    /**
-     * @return void
-     */
     public function getPropelConfig(): void
     {
         $this->assertIsArray($this->getConfig()->getPropelConfig());
     }
 
-    /**
-     * @return void
-     */
     public function testGetSchemaDirectoryShouldReturnPathToSchemas(): void
     {
         $this->assertTrue(is_dir($this->getConfig()->getSchemaDirectory()));
     }
 
-    /**
-     * @return void
-     */
     public function testGetPropelSchemaPathPatterShouldReturnArrayWithPatternsToSchemaDirectories(): void
     {
         $pathPatterns = $this->getConfig()->getPropelSchemaPathPatterns();
         $this->assertTrue(is_array($pathPatterns));
     }
 
-    /**
-     * @return void
-     */
     public function testGetLogPath(): void
     {
         $this->assertIsString($this->getConfig()->getLogPath());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCurrentDatabaseEngine(): void
     {
         $this->assertIsString($this->getConfig()->getCurrentDatabaseEngine());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCurrentDatabaseEngineName(): void
     {
         $this->assertIsString($this->getConfig()->getCurrentDatabaseEngineName());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCurrentDatabaseEngineNameThrowsException(): void
     {
         $propelConfigMock = $this->getPropelConfigMock();

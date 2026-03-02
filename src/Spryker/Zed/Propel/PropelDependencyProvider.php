@@ -92,11 +92,6 @@ class PropelDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addTransferFacade(Container $container): Container
     {
         $container->set(static::FACADE_TRANSFER, function (Container $container) {
@@ -106,11 +101,6 @@ class PropelDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addPropelSchemaElementFilterPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_PROPEL_SCHEMA_ELEMENT_FILTER, function () {

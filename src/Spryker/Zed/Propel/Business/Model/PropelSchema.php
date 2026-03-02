@@ -33,13 +33,6 @@ class PropelSchema implements PropelSchemaInterface
      */
     protected $merger;
 
-    /**
-     * @param \Spryker\Zed\Propel\Business\Model\PropelGroupedSchemaFinderInterface $finder
-     * @param \Spryker\Zed\Propel\Business\Model\PropelSchemaWriterInterface $writer
-     * @param \Spryker\Zed\Propel\Business\Model\PropelSchemaMergerInterface $merger
-     * @param \Spryker\Zed\Kernel\ClassResolver\AbstractClassResolver $bundleConfigResolver
-     * @param \Spryker\Shared\Kernel\ClassResolver\AbstractClassResolver $sharedConfigResolver
-     */
     public function __construct(
         PropelGroupedSchemaFinderInterface $finder,
         PropelSchemaWriterInterface $writer,
@@ -94,11 +87,6 @@ class PropelSchema implements PropelSchemaInterface
         return $schemaFile->getContents();
     }
 
-    /**
-     * @param array $groupedSchemas
-     *
-     * @return array
-     */
     protected function getGroupedSchemasWithOptionalFeatures(array $groupedSchemas): array
     {
         $filteredGroupedSchemas = array_filter($groupedSchemas, function ($schemaFile) {

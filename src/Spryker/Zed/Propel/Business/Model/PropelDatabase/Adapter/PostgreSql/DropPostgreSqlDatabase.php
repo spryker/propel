@@ -28,9 +28,6 @@ class DropPostgreSqlDatabase implements DropDatabaseInterface
      */
     protected $config;
 
-    /**
-     * @param \Spryker\Zed\Propel\PropelConfig $config
-     */
     public function __construct(PropelConfig $config)
     {
         $this->config = $config;
@@ -54,9 +51,6 @@ class DropPostgreSqlDatabase implements DropDatabaseInterface
         return $this->runProcess($this->getDropCommand());
     }
 
-    /**
-     * @return void
-     */
     protected function closeOpenConnections(): void
     {
         $pdoConnection = $this->createPdoConnection();
@@ -162,9 +156,6 @@ class DropPostgreSqlDatabase implements DropDatabaseInterface
         return $value;
     }
 
-    /**
-     * @return string
-     */
     protected function getCloseOpenedConnectionsQuery(): string
     {
         return sprintf('
@@ -174,9 +165,6 @@ class DropPostgreSqlDatabase implements DropDatabaseInterface
         ', $this->getConfigValue(PropelConstants::ZED_DB_DATABASE));
     }
 
-    /**
-     * @return \PDO
-     */
     protected function createPdoConnection(): PDO
     {
         $dsn = sprintf(

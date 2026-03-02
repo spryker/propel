@@ -31,9 +31,6 @@ use Spryker\Zed\Propel\Dependency\Service\PropelToUtilTextServiceBridge;
  */
 class PropelSchemaValidatorTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testValidateReturnsTransferWithoutErrorsWhenNoAttributeValueChangeIsDetected(): void
     {
         $groupedSchemaFinder = $this->getGroupedSchemaFinder($this->getSchemaFinderForValidCase());
@@ -44,9 +41,6 @@ class PropelSchemaValidatorTest extends Unit
         $this->assertTrue($schemaValidationTransfer->getIsSuccess());
     }
 
-    /**
-     * @return void
-     */
     public function testValidateReturnsTransferWithErrorsWhenAttributeValueChangeIsDetected(): void
     {
         $groupedSchemaFinder = $this->getGroupedSchemaFinder($this->getSchemaFinderForInvalidCase());
@@ -56,9 +50,6 @@ class PropelSchemaValidatorTest extends Unit
         $this->assertFalse($schemaValidationTransfer->getIsSuccess());
     }
 
-    /**
-     * @return void
-     */
     public function testValidateReturnsTransferWithoutErrorsWhenAttributeValueChangeIsDetectedButWhitelisted(): void
     {
         $groupedSchemaFinder = $this->getGroupedSchemaFinder($this->getSchemaFinderForInvalidCase());
@@ -68,19 +59,11 @@ class PropelSchemaValidatorTest extends Unit
         $this->assertTrue($schemaValidationTransfer->getIsSuccess());
     }
 
-    /**
-     * @param \Spryker\Zed\Propel\Business\Model\PropelSchemaFinderInterface $innerFinder
-     *
-     * @return \Spryker\Zed\Propel\Business\Model\PropelGroupedSchemaFinderInterface
-     */
     protected function getGroupedSchemaFinder(PropelSchemaFinderInterface $innerFinder): PropelGroupedSchemaFinderInterface
     {
         return new PropelGroupedSchemaFinder($innerFinder);
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Business\Model\PropelSchemaFinderInterface
-     */
     protected function getSchemaFinderForValidCase(): PropelSchemaFinderInterface
     {
         $schemaFinder = new PropelSchemaFinder([
@@ -90,9 +73,6 @@ class PropelSchemaValidatorTest extends Unit
         return $schemaFinder;
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Business\Model\PropelSchemaFinderInterface
-     */
     protected function getSchemaFinderForInvalidCase(): PropelSchemaFinderInterface
     {
         $schemaFinder = new PropelSchemaFinder([
@@ -102,9 +82,6 @@ class PropelSchemaValidatorTest extends Unit
         return $schemaFinder;
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Dependency\Service\PropelToUtilTextServiceBridge
-     */
     protected function getUtilTextService(): PropelToUtilTextServiceBridge
     {
         return new PropelToUtilTextServiceBridge(new UtilTextService());

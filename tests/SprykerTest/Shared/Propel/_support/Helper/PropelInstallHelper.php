@@ -35,9 +35,6 @@ class PropelInstallHelper extends Module
         }
     }
 
-    /**
-     * @return void
-     */
     protected function initPropel(): void
     {
         $this->copyFromTestBundle();
@@ -49,9 +46,6 @@ class PropelInstallHelper extends Module
         $this->runCommands();
     }
 
-    /**
-     * @return void
-     */
     private function runCommands(): void
     {
         foreach ($this->getCommands() as $command) {
@@ -59,9 +53,6 @@ class PropelInstallHelper extends Module
         }
     }
 
-    /**
-     * @return array
-     */
     private function getCommands(): array
     {
         return [
@@ -71,17 +62,11 @@ class PropelInstallHelper extends Module
         ];
     }
 
-    /**
-     * @return string
-     */
     private function getModelBuildCommand(): string
     {
         return $this->getBaseCommand() . ' vendor/bin/console propel:model:build';
     }
 
-    /**
-     * @return string
-     */
     private function getBaseCommand(): string
     {
         return 'APPLICATION_ENV=' . APPLICATION_ENV
@@ -90,27 +75,16 @@ class PropelInstallHelper extends Module
             . ' APPLICATION=' . APPLICATION;
     }
 
-    /**
-     * @return string
-     */
     private function createDiffCommand(): string
     {
         return $this->getBaseCommand() . ' vendor/bin/console propel:diff';
     }
 
-    /**
-     * @return string
-     */
     private function createMigrateCommand(): string
     {
         return $this->getBaseCommand() . ' vendor/bin/console propel:migrate';
     }
 
-    /**
-     * @param string $command
-     *
-     * @return void
-     */
     protected function runCommand(string $command): void
     {
         $process = $this->createProcess($command);
@@ -123,9 +97,6 @@ class PropelInstallHelper extends Module
         });
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Business\PropelFacade
-     */
     private function getFacade(): PropelFacade
     {
         return new PropelFacade();
@@ -155,11 +126,6 @@ class PropelInstallHelper extends Module
         }
     }
 
-    /**
-     * @param string $testBundleSchemaDirectory
-     *
-     * @return \Symfony\Component\Finder\Finder
-     */
     private function getBundleSchemaFinder(string $testBundleSchemaDirectory): Finder
     {
         $finder = new Finder();
@@ -181,11 +147,6 @@ class PropelInstallHelper extends Module
         return $pathForSchemas;
     }
 
-    /**
-     * @param string $pathForSchemas
-     *
-     * @return void
-     */
     private function createTargetSchemaDirectoryIfNotExists(string $pathForSchemas): void
     {
         if (!is_dir($pathForSchemas)) {
@@ -193,11 +154,6 @@ class PropelInstallHelper extends Module
         }
     }
 
-    /**
-     * @param string $command
-     *
-     * @return \Symfony\Component\Process\Process
-     */
     protected function createProcess(string $command): Process
     {
         // Shim for Symfony 3.x, to be removed when Symfony dependency becomes 4.2+
@@ -209,9 +165,6 @@ class PropelInstallHelper extends Module
         return Process::fromShellCommandline($command, Configuration::projectDir());
     }
 
-    /**
-     * @return string
-     */
     private function getApplicationStore(): string
     {
         if (!defined('APPLICATION_STORE')) {

@@ -56,9 +56,6 @@ class PropelPersistenceTester extends Actor
      */
     protected $skipEntityPrimaryIds = [];
 
-    /**
-     * @param \Codeception\Scenario $scenario
-     */
     public function __construct(Scenario $scenario)
     {
         parent::__construct($scenario);
@@ -112,11 +109,6 @@ class PropelPersistenceTester extends Actor
         }
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     *
-     * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface
-     */
     protected function fillEntityWithRequiredFields(ActiveRecordInterface $entity): ActiveRecordInterface
     {
         $entityClassName = get_class($entity);
@@ -235,11 +227,6 @@ class PropelPersistenceTester extends Actor
         return new $this->queryClasses[$relatedTableName]();
     }
 
-    /**
-     * @param \Propel\Runtime\Map\ColumnMap $columnMap
-     *
-     * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface|null
-     */
     protected function findRelatedEntity(ColumnMap $columnMap): ?ActiveRecordInterface
     {
         $relatedEntityQuery = $this->getEntityQueryByTableName($columnMap->getRelatedTableName());
@@ -261,11 +248,6 @@ class PropelPersistenceTester extends Actor
         return $relatedEntityQuery->find()->getFirst();
     }
 
-    /**
-     * @param string $tableName
-     *
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria
-     */
     protected function getEntityQueryByTableName(string $tableName): ModelCriteria
     {
         $relatedQueryClass = $this->getQueryClassByRelatedTableName($tableName);

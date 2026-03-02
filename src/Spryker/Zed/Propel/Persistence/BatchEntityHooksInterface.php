@@ -14,13 +14,7 @@ namespace Spryker\Zed\Propel\Persistence;
  */
 interface BatchEntityHooksInterface
 {
-    /**
-     * @return void
-     */
     public function batchPreSaveHook(): void;
 
-    /**
-     * @return void
-     */
     public function batchPostSaveHook(): void;
 }

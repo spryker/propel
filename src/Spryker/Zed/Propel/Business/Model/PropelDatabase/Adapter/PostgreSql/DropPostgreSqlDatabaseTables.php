@@ -13,26 +13,17 @@ use Spryker\Zed\Propel\Business\Model\PropelDatabase\Command\DropDatabaseTablesI
 
 class DropPostgreSqlDatabaseTables implements DropDatabaseTablesInterface
 {
-    /**
-     * @return void
-     */
     public function dropTables(): void
     {
         $conn = $this->getConnection();
         $conn->exec($this->getDropQuery());
     }
 
-    /**
-     * @return \Propel\Runtime\Connection\ConnectionInterface
-     */
     protected function getConnection(): ConnectionInterface
     {
         return Propel::getConnection();
     }
 
-    /**
-     * @return string
-     */
     protected function getDropQuery(): string
     {
         return "

@@ -27,9 +27,6 @@ class RemoveEntityTransferConsole extends Console
      */
     public const COMMAND_DESCRIPTION = 'Removes generated entity transfer objects';
 
-    /**
-     * @return void
-     */
     protected function configure(): void
     {
         parent::configure();
@@ -39,12 +36,6 @@ class RemoveEntityTransferConsole extends Console
             ->setHelp('<info>' . static::COMMAND_NAME . ' -h</info>');
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $transferFacade = $this->getFactory()->getTransferFacade();

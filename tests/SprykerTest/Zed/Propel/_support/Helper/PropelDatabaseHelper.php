@@ -45,9 +45,6 @@ class PropelDatabaseHelper extends Module
         parent::_beforeSuite($settings);
     }
 
-    /**
-     * @return void
-     */
     public function _afterSuite(): void
     {
         parent::_afterSuite();
@@ -55,11 +52,6 @@ class PropelDatabaseHelper extends Module
         static::$pdoConnection = null;
     }
 
-    /**
-     * @param int $version
-     *
-     * @return int
-     */
     public function havePropelMigrationPersisted(int $version): int
     {
         $query = sprintf(
@@ -79,9 +71,6 @@ class PropelDatabaseHelper extends Module
         return $version;
     }
 
-    /**
-     * @return void
-     */
     public function ensurePropelMigrationTableIsEmpty(): void
     {
         $query = sprintf(
@@ -94,9 +83,6 @@ class PropelDatabaseHelper extends Module
             ->execute();
     }
 
-    /**
-     * @return \PDO
-     */
     protected function getConnection(): PDO
     {
         if (!static::$pdoConnection) {
@@ -110,9 +96,6 @@ class PropelDatabaseHelper extends Module
         return static::$pdoConnection;
     }
 
-    /**
-     * @return string
-     */
     protected function getDatabaseSourceName(): string
     {
         return sprintf(

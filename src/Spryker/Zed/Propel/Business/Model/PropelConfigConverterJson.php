@@ -18,9 +18,6 @@ class PropelConfigConverterJson implements PropelConfigConverterInterface
      */
     protected $config;
 
-    /**
-     * @param array $config
-     */
     public function __construct(array $config)
     {
         $this->config = $config;

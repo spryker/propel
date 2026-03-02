@@ -21,9 +21,6 @@ class ImportPostgreSqlDatabase implements ImportDatabaseInterface
      */
     protected $config;
 
-    /**
-     * @param \Spryker\Zed\Propel\PropelConfig $config
-     */
     public function __construct(PropelConfig $config)
     {
         $this->config = $config;
@@ -110,11 +107,6 @@ class ImportPostgreSqlDatabase implements ImportDatabaseInterface
         return (bool)$returnValue;
     }
 
-    /**
-     * @param string $command
-     *
-     * @return \Symfony\Component\Process\Process
-     */
     protected function getProcess(string $command): Process
     {
         // Shim for Symfony 3.x, to be removed when Symfony dependency becomes 4.2+

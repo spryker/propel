@@ -30,13 +30,6 @@ class TableHelper extends Module
      */
     protected $tables = [];
 
-    /**
-     * @param string $name
-     * @param array $columnsData
-     * @param string $namespace
-     *
-     * @return \Propel\Generator\Model\Table
-     */
     public function createTable(string $name, array $columnsData, string $namespace = ''): Table
     {
         $this->dropTables();
@@ -69,11 +62,6 @@ class TableHelper extends Module
         return $table;
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _after(TestInterface $test): void
     {
         parent::_after($test);
@@ -81,9 +69,6 @@ class TableHelper extends Module
         $this->dropTables();
     }
 
-    /**
-     * @return \Propel\Generator\Platform\DefaultPlatform
-     */
     protected function getPlatform(): DefaultPlatform
     {
         $dbEngine = Config::get(PropelConstants::ZED_DB_ENGINE);
@@ -98,9 +83,6 @@ class TableHelper extends Module
         return new $class();
     }
 
-    /**
-     * @return void
-     */
     protected function dropTables(): void
     {
         $platform = $this->getPlatform();

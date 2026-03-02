@@ -27,9 +27,6 @@ use Spryker\Zed\Propel\Business\Model\Schema\XmlValidator\PropelSchemaXmlNameVal
  */
 class PropelSchemaXmlNameValidatorTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testValidateShouldReturnTransferWithoutErrorsWhenNamesHaveProperLengthAndTableNamesAreUnique(): void
     {
         $this->assertTrue($this->executeXmlValidation(['Valid']));
@@ -47,11 +44,6 @@ class PropelSchemaXmlNameValidatorTest extends Unit
         $this->assertFalse($this->executeXmlValidation($dirPattern));
     }
 
-    /**
-     * @param array $dirPattern
-     *
-     * @return bool
-     */
     protected function executeXmlValidation(array $dirPattern): bool
     {
         $propelSchemaValidator = new PropelSchemaXmlNameValidator(
@@ -62,9 +54,6 @@ class PropelSchemaXmlNameValidatorTest extends Unit
         return (bool)$schemaValidationTransfer->getIsSuccess();
     }
 
-    /**
-     * @return array
-     */
     public function invalidXmlValidationDataProvider(): array
     {
         return [
@@ -78,11 +67,6 @@ class PropelSchemaXmlNameValidatorTest extends Unit
         ];
     }
 
-    /**
-     * @param array $dirPattern
-     *
-     * @return \Spryker\Zed\Propel\Business\Model\PropelSchemaFinderInterface
-     */
     protected function getPropelSchemaFinder(array $dirPattern): PropelSchemaFinderInterface
     {
         $pathParts = array_merge([

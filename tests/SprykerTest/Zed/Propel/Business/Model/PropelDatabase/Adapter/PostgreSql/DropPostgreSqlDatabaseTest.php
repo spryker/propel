@@ -26,9 +26,6 @@ use Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\PostgreSql\DropPost
  */
 class DropPostgreSqlDatabaseTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testDropDatabase(): void
     {
         $dropPostgreSqlDatabaseMock = $this->getDropPostgreSqlDatabaseMock([

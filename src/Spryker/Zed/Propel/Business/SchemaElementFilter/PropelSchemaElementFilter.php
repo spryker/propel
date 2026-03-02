@@ -24,11 +24,6 @@ class PropelSchemaElementFilter implements SchemaElementFilterInterface
         $this->schemaElementFilterPlugins = $schemaElementFilterPlugins;
     }
 
-    /**
-     * @param \SimpleXMLElement $schemaXmlElement
-     *
-     * @return \SimpleXMLElement
-     */
     public function filter(SimpleXMLElement $schemaXmlElement): SimpleXMLElement
     {
         foreach ($this->schemaElementFilterPlugins as $elementFilterPlugin) {

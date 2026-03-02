@@ -9,8 +9,5 @@ namespace Spryker\Zed\Propel\Business\Model;
 
 interface PropelTableMapLoaderInterface
 {
-    /**
-     * @return bool
-     */
     public function loadTableMap(): bool;
 }

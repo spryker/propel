@@ -30,9 +30,6 @@ class DatabaseCreatorCollectionTest extends Unit
      */
     public const TEST_ENGINE = 'testEngine';
 
-    /**
-     * @return void
-     */
     public function testAdd(): void
     {
         $databaseCreatorMock = $this->getDatabaseCreatorMock();
@@ -41,9 +38,6 @@ class DatabaseCreatorCollectionTest extends Unit
         $this->assertSame($databaseCreatorCollection, $databaseCreatorCollection->add($databaseCreatorMock));
     }
 
-    /**
-     * @return void
-     */
     public function testHasReturnTrue(): void
     {
         $databaseCreatorMock = $this->getDatabaseCreatorMock();
@@ -53,9 +47,6 @@ class DatabaseCreatorCollectionTest extends Unit
         $this->assertTrue($databaseCreatorCollection->has(static::TEST_ENGINE));
     }
 
-    /**
-     * @return void
-     */
     public function testHasReturnFalse(): void
     {
         $databaseCreatorMock = $this->getDatabaseCreatorMock();
@@ -65,9 +56,6 @@ class DatabaseCreatorCollectionTest extends Unit
         $this->assertFalse($databaseCreatorCollection->has('no existing engine'));
     }
 
-    /**
-     * @return void
-     */
     public function testGet(): void
     {
         $databaseCreatorMock = $this->getDatabaseCreatorMock();

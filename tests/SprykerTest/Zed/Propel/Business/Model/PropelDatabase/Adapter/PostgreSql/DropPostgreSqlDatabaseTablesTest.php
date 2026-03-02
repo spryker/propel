@@ -28,9 +28,6 @@ use Spryker\Zed\Propel\Business\Model\PropelDatabase\Command\DropDatabaseTablesI
  */
 class DropPostgreSqlDatabaseTablesTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testDropTablesShouldDropTables(): void
     {
         $dropPostgreSqlDatabaseTablesMock = $this->getDropPostgreSqlDatabaseTablesMock();

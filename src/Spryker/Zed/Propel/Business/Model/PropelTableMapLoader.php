@@ -23,17 +23,11 @@ class PropelTableMapLoader implements PropelTableMapLoaderInterface
      */
     protected $propelConfig;
 
-    /**
-     * @param \Spryker\Zed\Propel\PropelConfig $propelConfig
-     */
     public function __construct(PropelConfig $propelConfig)
     {
         $this->propelConfig = $propelConfig;
     }
 
-    /**
-     * @return bool
-     */
     public function loadTableMap(): bool
     {
         $tableMapPath = $this->getTableMapPath();
@@ -47,9 +41,6 @@ class PropelTableMapLoader implements PropelTableMapLoaderInterface
         return true;
     }
 
-    /**
-     * @return string
-     */
     protected function getTableMapPath(): string
     {
         return $this->propelConfig->getPropelConfig()['paths']['loaderScriptDir'] . DIRECTORY_SEPARATOR . static::TABLE_MAP_LOADER_SCRIPT_FILENAME;

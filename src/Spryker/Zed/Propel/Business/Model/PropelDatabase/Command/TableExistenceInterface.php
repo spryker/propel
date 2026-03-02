@@ -9,10 +9,5 @@ namespace Spryker\Zed\Propel\Business\Model\PropelDatabase\Command;
 
 interface TableExistenceInterface
 {
-    /**
-     * @param string $tableName
-     *
-     * @return bool
-     */
     public function tableExists(string $tableName): bool;
 }

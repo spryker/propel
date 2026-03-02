@@ -22,9 +22,6 @@ class PropelFilterCriteria implements PropelFilterCriteriaInterface
      */
     protected $filterTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
-     */
     public function __construct(FilterTransfer $filterTransfer)
     {
         $this->filterTransfer = $filterTransfer;
@@ -58,11 +55,6 @@ class PropelFilterCriteria implements PropelFilterCriteriaInterface
         return $criteria;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Criteria $criteria
-     *
-     * @return \Propel\Runtime\ActiveQuery\Criteria
-     */
     protected function addPaginationToCriteria(Criteria $criteria): Criteria
     {
         $limit = $this->filterTransfer->getLimit();
@@ -78,11 +70,6 @@ class PropelFilterCriteria implements PropelFilterCriteriaInterface
         return $criteria;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Criteria $criteria
-     *
-     * @return \Propel\Runtime\ActiveQuery\Criteria
-     */
     protected function addSortingToCriteria(Criteria $criteria): Criteria
     {
         $orderByColumnName = $this->filterTransfer->getOrderBy();
@@ -102,11 +89,6 @@ class PropelFilterCriteria implements PropelFilterCriteriaInterface
         return $criteria;
     }
 
-    /**
-     * @param string $orderByColumnName
-     *
-     * @return bool
-     */
     protected function isColumnNameValid(string $orderByColumnName): bool
     {
         return (bool)preg_match(static::PATTERN_VALID_COLUMN_NAME, $orderByColumnName);

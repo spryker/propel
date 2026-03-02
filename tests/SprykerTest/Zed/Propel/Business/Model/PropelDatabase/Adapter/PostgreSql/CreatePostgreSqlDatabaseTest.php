@@ -26,9 +26,6 @@ use Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\PostgreSql\CreatePo
  */
 class CreatePostgreSqlDatabaseTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testCreateIfNotExistsShouldCreateDatabaseWhenDatabaseDoesNotExist(): void
     {
         $createPostgreSqlDatabaseMock = $this->getCreatePostgreSqlDatabaseMock();
@@ -41,9 +38,6 @@ class CreatePostgreSqlDatabaseTest extends Unit
         $createPostgreSqlDatabaseMock->createIfNotExists();
     }
 
-    /**
-     * @return void
-     */
     public function testCreateIfNotExistsShouldSkipDatabaseCreationWhenDatabaseExist(): void
     {
         $createPostgreSqlDatabaseMock = $this->getCreatePostgreSqlDatabaseMock();

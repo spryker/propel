@@ -71,9 +71,6 @@ class ActiveRecordBatchProcessorTraitTest extends Unit
         return $classNames;
     }
 
-    /**
-     * @return \Closure
-     */
     protected function getDirectoriesFilter(): Closure
     {
         return function (SplFileInfo $splFileInfo) {
@@ -85,11 +82,6 @@ class ActiveRecordBatchProcessorTraitTest extends Unit
         };
     }
 
-    /**
-     * @param \Symfony\Component\Finder\SplFileInfo $splFileInfo
-     *
-     * @return bool
-     */
     protected function exclude(SplFileInfo $splFileInfo): bool
     {
         if ($splFileInfo->isDir()) {

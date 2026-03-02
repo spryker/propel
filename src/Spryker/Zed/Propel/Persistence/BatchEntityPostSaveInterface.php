@@ -13,20 +13,9 @@ use Propel\Runtime\ActiveRecord\ActiveRecordInterface;
 
 interface BatchEntityPostSaveInterface
 {
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     *
-     * @return void
-     */
     public function sharedPersist(ActiveRecordInterface $entity): void;
 
-    /**
-     * @return bool
-     */
     public function recursiveCommit(): bool;
 
-    /**
-     * @return void
-     */
     public function batchPostSave(): void;
 }

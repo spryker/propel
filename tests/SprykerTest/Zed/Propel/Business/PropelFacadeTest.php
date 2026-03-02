@@ -53,9 +53,6 @@ class PropelFacadeTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testCleanPropelSchemaDirectoryShouldRemoveSchemaDirectoryAndAllFilesInIt(): void
     {
         $schemaDirectory = $this->tester->getVirtualDirectory();
@@ -69,9 +66,6 @@ class PropelFacadeTest extends Unit
         $this->assertFalse(is_dir($schemaDirectory));
     }
 
-    /**
-     * @return void
-     */
     public function testCopySchemaFilesToTargetDirectoryShouldCollectAllSchemaFilesMergeAndCopyThemToSpecifiedDirectory(): void
     {
         $schemaDirectory = $this->tester->getVirtualDirectory();
@@ -87,9 +81,6 @@ class PropelFacadeTest extends Unit
         $this->assertTrue(is_dir($schemaDirectory));
     }
 
-    /**
-     * @return void
-     */
     public function testAdjustPropelSchemaFilesForPostgresqlShouldAddIdMethodParameter(): void
     {
         if (Config::get(PropelConstants::ZED_DB_ENGINE) !== PropelConfig::DB_ENGINE_PGSQL) {
@@ -119,9 +110,6 @@ class PropelFacadeTest extends Unit
         $this->assertSame($expectedXml, $actualXml);
     }
 
-    /**
-     * @return void
-     */
     public function testAdjustPostgresqlFunctionsShouldAddFunctions(): void
     {
         if (Config::get(PropelConstants::ZED_DB_ENGINE) !== PropelConfig::DB_ENGINE_PGSQL) {
@@ -149,9 +137,6 @@ class PropelFacadeTest extends Unit
         $this->assertTrue($this->executeExistsQuery($connection, 'group_concat'));
     }
 
-    /**
-     * @return void
-     */
     public function testDeleteMigrationFilesDirectoryShouldRemoveMigrationDirectory(): void
     {
         // Arrange
@@ -168,9 +153,6 @@ class PropelFacadeTest extends Unit
         $this->assertFalse(is_dir($schemaDirectory));
     }
 
-    /**
-     * @return void
-     */
     public function testTableExistsReturnsFalseOnNonExistingTable(): void
     {
         //Arrange
@@ -183,9 +165,6 @@ class PropelFacadeTest extends Unit
         $this->assertFalse($result);
     }
 
-    /**
-     * @return void
-     */
     public function testTableExistsReturnsTrueOnExistingTable(): void
     {
         //Arrange
@@ -203,11 +182,6 @@ class PropelFacadeTest extends Unit
         $this->assertTrue($result);
     }
 
-    /**
-     * @param string $fileName
-     *
-     * @return string
-     */
     protected function getFixturesPathToFile(string $fileName): string
     {
         $pathParts = [
@@ -220,12 +194,6 @@ class PropelFacadeTest extends Unit
         return implode(DIRECTORY_SEPARATOR, $pathParts);
     }
 
-    /**
-     * @param \Propel\Runtime\Connection\ConnectionInterface $connection
-     * @param string $name
-     *
-     * @return bool
-     */
     protected function executeExistsQuery(ConnectionInterface $connection, string $name): bool
     {
         if (Config::get(PropelConstants::ZED_DB_ENGINE) !== PropelConfig::DB_ENGINE_PGSQL) {

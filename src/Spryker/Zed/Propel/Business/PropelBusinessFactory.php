@@ -55,9 +55,6 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class PropelBusinessFactory extends AbstractBusinessFactory
 {
-    /**
-     * @return \Spryker\Zed\Propel\Business\ConfigReader\PropelConfigReaderInterface
-     */
     public function createPropelConfigReader(): PropelConfigReaderInterface
     {
         return new PropelConfigReader($this->getConfig());
@@ -233,9 +230,6 @@ class PropelBusinessFactory extends AbstractBusinessFactory
         return new PropelConfigConverterJson($this->getConfig()->getPropelConfig());
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Business\Model\PropelTableMapLoaderInterface
-     */
     public function createPropelTableMapLoader(): PropelTableMapLoaderInterface
     {
         return new PropelTableMapLoader($this->getConfig());
@@ -407,9 +401,6 @@ class PropelBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Business\Model\Schema\XmlValidator\PropelSchemaXmlNameValidator
-     */
     public function createSchemaXmlValidator(): PropelSchemaXmlNameValidator
     {
         return new PropelSchemaXmlNameValidator(
@@ -425,17 +416,11 @@ class PropelBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(PropelDependencyProvider::UTIL_TEXT_SERVICE);
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Business\Model\HealthCheck\HealthCheckInterface
-     */
     public function createPropelHealthChecker(): HealthCheckInterface
     {
         return new PropelHealthCheck();
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Business\SchemaElementFilter\SchemaElementFilterInterface
-     */
     public function createPropelSchemaElementFilter(): SchemaElementFilterInterface
     {
         return new PropelSchemaElementFilter($this->getPropelSchemaElementFilterPlugins());
@@ -449,17 +434,11 @@ class PropelBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(PropelDependencyProvider::PLUGINS_PROPEL_SCHEMA_ELEMENT_FILTER);
     }
 
-    /**
-     * @return \Spryker\Zed\Kernel\ClassResolver\AbstractClassResolver
-     */
     public function createBundleConfigResolver(): ZedAbstractClassResolver
     {
         return new BundleConfigResolver();
     }
 
-    /**
-     * @return \Spryker\Shared\Kernel\ClassResolver\AbstractClassResolver
-     */
     public function createSharedConfigResolver(): SharedAbstractClassResolver
     {
         return new SharedConfigResolver();

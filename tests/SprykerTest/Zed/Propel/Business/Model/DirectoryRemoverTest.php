@@ -29,9 +29,6 @@ class DirectoryRemoverTest extends Unit
      */
     protected $fixtureDirectory;
 
-    /**
-     * @return void
-     */
     public function setUp(): void
     {
         $this->fixtureDirectory = __DIR__ . '/TempFixtures';
@@ -43,9 +40,6 @@ class DirectoryRemoverTest extends Unit
         $this->assertFileExists($filename);
     }
 
-    /**
-     * @return void
-     */
     public function tearDown(): void
     {
         if (is_dir($this->fixtureDirectory)) {
@@ -54,9 +48,6 @@ class DirectoryRemoverTest extends Unit
         }
     }
 
-    /**
-     * @return void
-     */
     public function testAfterExecutionGeneratedDirectoryMustBeRemoved(): void
     {
         $directoryRemover = new DirectoryRemover($this->fixtureDirectory);

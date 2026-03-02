@@ -66,11 +66,6 @@ trait ActiveRecordBatchProcessorTrait
      */
     protected $highPrecisionDateTime;
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     *
-     * @return void
-     */
     public function persist(ActiveRecordInterface $entity): void
     {
         if (!$entity->isModified()) {
@@ -88,11 +83,6 @@ trait ActiveRecordBatchProcessorTrait
         $this->{$storageName}[$className][] = $entity;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     *
-     * @return void
-     */
     public function remove(ActiveRecordInterface $entity): void
     {
         if ($entity->isNew()) {
@@ -108,9 +98,6 @@ trait ActiveRecordBatchProcessorTrait
         $this->entitiesToRemove[$className][] = $entity;
     }
 
-    /**
-     * @return bool
-     */
     public function commit(): bool
     {
         $this->removeEntities($this->entitiesToRemove);
@@ -122,9 +109,6 @@ trait ActiveRecordBatchProcessorTrait
         return true;
     }
 
-    /**
-     * @return bool
-     */
     public function commitIdentical(): bool
     {
         $this->insertIdenticalEntities($this->entitiesToInsert);
@@ -413,11 +397,6 @@ trait ActiveRecordBatchProcessorTrait
         }
     }
 
-    /**
-     * @param string $entityClassName
-     *
-     * @return \Propel\Runtime\Connection\ConnectionInterface
-     */
     protected function getWriteConnection(string $entityClassName): ConnectionInterface
     {
         $tableMapClass = $this->getTableMapClass($entityClassName);
@@ -425,17 +404,11 @@ trait ActiveRecordBatchProcessorTrait
         return Propel::getServiceContainer()->getWriteConnection($tableMapClass::DATABASE_NAME);
     }
 
-    /**
-     * @return bool
-     */
     protected function isMysql(): bool
     {
         return Propel::getServiceContainer()->getAdapterClass() === PropelConfig::DB_ENGINE_MYSQL;
     }
 
-    /**
-     * @return void
-     */
     protected function resetEntitiesForCommit(): void
     {
         $this->entitiesToInsert = [];
@@ -443,12 +416,6 @@ trait ActiveRecordBatchProcessorTrait
         $this->entitiesToRemove = [];
     }
 
-    /**
-     * @param string $entityClassName
-     * @param array $entitiesToRemove
-     *
-     * @return void
-     */
     protected function deleteEntitiesInBulk(string $entityClassName, array $entitiesToRemove): void
     {
         $primaryKeys = [];
@@ -521,12 +488,6 @@ trait ActiveRecordBatchProcessorTrait
         return $statements;
     }
 
-    /**
-     * @param string $entityClassName
-     * @param array $entities
-     *
-     * @return \Propel\Runtime\Connection\StatementInterface
-     */
     protected function buildInsertStatementIdentical(string $entityClassName, array $entities): StatementInterface
     {
         $tableMapClass = $this->getTableMapClass($entityClassName);
@@ -691,12 +652,6 @@ trait ActiveRecordBatchProcessorTrait
         return $statement;
     }
 
-    /**
-     * @param \Propel\Runtime\Connection\StatementInterface $statement
-     * @param array $values
-     *
-     * @return \Propel\Runtime\Connection\StatementInterface
-     */
     protected function bindInsertValues(StatementInterface $statement, array $values): StatementInterface
     {
         $values = array_filter($values, function (array $columnDetails) {
@@ -713,12 +668,6 @@ trait ActiveRecordBatchProcessorTrait
         return $statement;
     }
 
-    /**
-     * @param \Propel\Runtime\Connection\StatementInterface $statement
-     * @param array $valuesForBind
-     *
-     * @return \Propel\Runtime\Connection\StatementInterface
-     */
     protected function bindInsertValuesIdentical(StatementInterface $statement, array $valuesForBind): StatementInterface
     {
         foreach ($valuesForBind as $queryParam => $value) {
@@ -868,14 +817,6 @@ trait ActiveRecordBatchProcessorTrait
         return $statements;
     }
 
-    /**
-     * @param array $columnMapCollection
-     * @param \Propel\Runtime\Map\TableMap $tableMapClass
-     * @param string $tableMapClassName
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     *
-     * @return array
-     */
     protected function prepareValuesForUpdate(
         array $columnMapCollection,
         TableMap $tableMapClass,
@@ -904,12 +845,6 @@ trait ActiveRecordBatchProcessorTrait
         return [$valuesForUpdate, $idColumnValuesAndTypes];
     }
 
-    /**
-     * @param \Propel\Runtime\Connection\StatementInterface $statement
-     * @param array $values
-     *
-     * @return \Propel\Runtime\Connection\StatementInterface
-     */
     protected function bindUpdateValues(StatementInterface $statement, array $values): StatementInterface
     {
         foreach ($values as $rowValues) {
@@ -921,12 +856,6 @@ trait ActiveRecordBatchProcessorTrait
         return $statement;
     }
 
-    /**
-     * @param \Propel\Runtime\Connection\StatementInterface $statement
-     * @param array $values
-     *
-     * @return \Propel\Runtime\Connection\StatementInterface
-     */
     protected function bindUpdatePostgresValues(StatementInterface $statement, array $values): StatementInterface
     {
         foreach (array_values($values) as $index => $value) {
@@ -936,12 +865,6 @@ trait ActiveRecordBatchProcessorTrait
         return $statement;
     }
 
-    /**
-     * @param string $columnName
-     * @param \Propel\Runtime\Map\TableMap $tableMapClass
-     *
-     * @return string
-     */
     protected function quote(string $columnName, TableMap $tableMapClass): string
     {
         if ($tableMapClass->isIdentifierQuotingEnabled()) {
@@ -951,9 +874,6 @@ trait ActiveRecordBatchProcessorTrait
         return $columnName;
     }
 
-    /**
-     * @return \Propel\Runtime\Adapter\AdapterInterface
-     */
     protected function getAdapter(): AdapterInterface
     {
         if ($this->adapter === null) {
@@ -963,11 +883,6 @@ trait ActiveRecordBatchProcessorTrait
         return $this->adapter;
     }
 
-    /**
-     * @param string $entityClassName
-     *
-     * @return \Propel\Runtime\Map\TableMap
-     */
     protected function getTableMapClass(string $entityClassName): TableMap
     {
         if (!isset($this->tableMapClasses[$entityClassName])) {
@@ -978,11 +893,6 @@ trait ActiveRecordBatchProcessorTrait
         return $this->tableMapClasses[$entityClassName];
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     *
-     * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface
-     */
     protected function updateDateTimes(ActiveRecordInterface $entity): ActiveRecordInterface
     {
         $highPrecisionDateTime = $this->getHighPrecisionDateTime();
@@ -1000,9 +910,6 @@ trait ActiveRecordBatchProcessorTrait
         return $entity;
     }
 
-    /**
-     * @return \DateTime
-     */
     protected function getHighPrecisionDateTime(): DateTime
     {
         if ($this->highPrecisionDateTime === null) {
@@ -1039,9 +946,6 @@ trait ActiveRecordBatchProcessorTrait
         return $value;
     }
 
-    /**
-     * @return bool
-     */
     protected function requiresPrimaryKeyValue(): bool
     {
         return ($this->getAdapter() instanceof PgsqlAdapter);

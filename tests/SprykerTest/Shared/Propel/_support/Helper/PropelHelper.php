@@ -78,9 +78,6 @@ class PropelHelper extends Module
         }
     }
 
-    /**
-     * @return void
-     */
     protected function setDefaultConfig(): void
     {
         $this->config = [
@@ -91,9 +88,6 @@ class PropelHelper extends Module
         ];
     }
 
-    /**
-     * @return void
-     */
     protected function runCommands(): void
     {
         $application = $this->createApplication();
@@ -108,9 +102,6 @@ class PropelHelper extends Module
         }
     }
 
-    /**
-     * @return \Symfony\Component\Console\Application
-     */
     protected function createApplication(): Application
     {
         $application = new Application();
@@ -133,9 +124,6 @@ class PropelHelper extends Module
         ];
     }
 
-    /**
-     * @return void
-     */
     protected function mockPropelSchemaPathPatterns(): void
     {
         $this->getConfigHelper()->mockConfigMethod(
@@ -155,9 +143,6 @@ class PropelHelper extends Module
         }, $this->config[static::CONFIG_SCHEMA_SOURCE_DIRECTORY_LIST]);
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Business\PropelFacade
-     */
     protected function getFacade(): PropelFacade
     {
         return $this->getBusinessHelper()->getFacade(static::PROPEL_MODULE_NAME);
@@ -197,11 +182,6 @@ class PropelHelper extends Module
         }
     }
 
-    /**
-     * @param array $schemaSourceDirectoryList
-     *
-     * @return \Symfony\Component\Finder\Finder
-     */
     protected function createPropelSchemaFinder(array $schemaSourceDirectoryList): Finder
     {
         $schemaSourceDirectoryList = array_map(function (string $schemaSourceDirectory) {

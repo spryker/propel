@@ -93,9 +93,6 @@ class PropelCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(PropelDependencyProvider::FACADE_LOG);
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Communication\Command\Runner\PropelCommandRunnerInterface
-     */
     public function createPropelCommandRunner(): PropelCommandRunnerInterface
     {
         return new PropelCommandRunner(
@@ -104,9 +101,6 @@ class PropelCommunicationFactory extends AbstractCommunicationFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Communication\Command\Config\PropelCommandConfiguratorInterface
-     */
     public function createPropelCommandConfigurator(): PropelCommandConfiguratorInterface
     {
         return new PropelCommandConfigurator(
@@ -114,65 +108,41 @@ class PropelCommunicationFactory extends AbstractCommunicationFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Communication\Command\Input\PropelCommandInputBuilderInterface
-     */
     public function createPropelCommandInputBuilder(): PropelCommandInputBuilderInterface
     {
         return new PropelCommandInputBuilder();
     }
 
-    /**
-     * @return \Symfony\Component\Console\Command\Command
-     */
     public function createMigrationDiffCommand(): Command
     {
         return new MigrationDiffCommand();
     }
 
-    /**
-     * @return \Symfony\Component\Console\Command\Command
-     */
     public function createMigrationMigrateCommand(): Command
     {
         return new MigrationMigrateCommand();
     }
 
-    /**
-     * @return \Symfony\Component\Console\Command\Command
-     */
     public function createMigrationStatusCommand(): Command
     {
         return new MigrationStatusCommand();
     }
 
-    /**
-     * @return \Symfony\Component\Console\Command\Command
-     */
     public function createModelBuildCommand(): Command
     {
         return new ModelBuildCommand();
     }
 
-    /**
-     * @return \Symfony\Component\Console\Command\Command
-     */
     public function createSqlBuildCommand(): Command
     {
         return new SqlBuildCommand();
     }
 
-    /**
-     * @return \Symfony\Component\Console\Command\Command
-     */
     public function createSqlInsertCommand(): Command
     {
         return new SqlInsertCommand();
     }
 
-    /**
-     * @return \Spryker\Zed\Propel\Dependency\Facade\PropelToTransferFacadeInterface
-     */
     public function getTransferFacade(): PropelToTransferFacadeInterface
     {
         return $this->getProvidedDependency(PropelDependencyProvider::FACADE_TRANSFER);

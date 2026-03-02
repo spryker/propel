@@ -19,9 +19,6 @@ class PostgresqlCompatibilityAdjuster implements PostgresqlCompatibilityAdjuster
      */
     protected $schemaFinder;
 
-    /**
-     * @param \Spryker\Zed\Propel\Business\Model\PropelSchemaFinderInterface $schemaFinder
-     */
     public function __construct(PropelSchemaFinderInterface $schemaFinder)
     {
         $this->schemaFinder = $schemaFinder;

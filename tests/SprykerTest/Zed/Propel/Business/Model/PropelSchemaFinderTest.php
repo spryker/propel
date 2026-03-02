@@ -23,9 +23,6 @@ use Symfony\Component\Finder\Finder;
  */
 class PropelSchemaFinderTest extends AbstractPropelSchemaTest
 {
-    /**
-     * @return void
-     */
     public function testGetSchemasShouldReturnIterateableFileCollection(): void
     {
         $schemaFinder = new PropelSchemaFinder(

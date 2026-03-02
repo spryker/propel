@@ -26,9 +26,6 @@ use Spryker\Zed\Propel\PropelConfig;
  */
 class MySqlDatabaseCreatorTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testGetEngine(): void
     {
         $mySqlDatabaseCreator = new MySqlDatabaseCreator();
@@ -36,9 +33,6 @@ class MySqlDatabaseCreatorTest extends Unit
         $this->assertSame(PropelConfig::DB_ENGINE_MYSQL, $mySqlDatabaseCreator->getEngine());
     }
 
-    /**
-     * @return void
-     */
     public function testCreateIfNotExists(): void
     {
         $mySqlDatabaseCreatorMock = $this->getMySqlDatabaseCreatorMock();

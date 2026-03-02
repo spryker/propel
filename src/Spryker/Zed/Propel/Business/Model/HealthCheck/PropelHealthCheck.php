@@ -13,9 +13,6 @@ use Propel\Runtime\Propel;
 
 class PropelHealthCheck implements HealthCheckInterface
 {
-    /**
-     * @return \Generated\Shared\Transfer\HealthCheckServiceResponseTransfer
-     */
     public function executeHealthCheck(): HealthCheckServiceResponseTransfer
     {
         $healthCheckServiceResponseTransfer = (new HealthCheckServiceResponseTransfer())

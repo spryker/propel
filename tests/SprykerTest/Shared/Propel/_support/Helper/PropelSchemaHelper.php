@@ -14,11 +14,6 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class PropelSchemaHelper extends Module
 {
-    /**
-     * @param string $xml
-     *
-     * @return string
-     */
     public function formatXml(string $xml): string
     {
         $dom = new DOMDocument('1.0');
@@ -29,11 +24,6 @@ class PropelSchemaHelper extends Module
         return preg_replace_callback('/^( +)</m', [$this, 'doubleSpaces'], $dom->saveXML());
     }
 
-    /**
-     * @param string $xmlFilePath
-     *
-     * @return \SimpleXMLElement
-     */
     public function createXmlElement(string $xmlFilePath): SimpleXMLElement
     {
         $schemaFile = new SplFileInfo($xmlFilePath, '', '');
@@ -41,11 +31,6 @@ class PropelSchemaHelper extends Module
         return new SimpleXMLElement($schemaFile->getContents());
     }
 
-    /**
-     * @param array $matches
-     *
-     * @return string
-     */
     protected function doubleSpaces(array $matches): string
     {
         $multiplier = strlen($matches[1]) * 2;

@@ -11,10 +11,5 @@ use SimpleXMLElement;
 
 interface SchemaElementFilterInterface
 {
-    /**
-     * @param \SimpleXMLElement $schemaXmlElement
-     *
-     * @return \SimpleXMLElement
-     */
     public function filter(SimpleXMLElement $schemaXmlElement): SimpleXMLElement;
 }

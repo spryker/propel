@@ -17,11 +17,6 @@ use Spryker\Zed\Propel\Communication\Plugin\ServiceProvider\PropelServiceProvide
 
 class ConnectionHelper extends Module
 {
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         if (class_exists(PropelApplicationPlugin::class)) {
@@ -45,11 +40,6 @@ class ConnectionHelper extends Module
         $propelServiceProvider->boot(new Application());
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _after(TestInterface $test): void
     {
         Propel::closeConnections();

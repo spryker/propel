@@ -24,9 +24,6 @@ class DatabaseDropTablesConsole extends Console
      */
     public const COMMAND_NAME = 'propel:tables:drop';
 
-    /**
-     * @return void
-     */
     protected function configure(): void
     {
         $this->setName(static::COMMAND_NAME);
@@ -35,12 +32,6 @@ class DatabaseDropTablesConsole extends Console
         parent::configure();
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->info('Dropping all database tables.');

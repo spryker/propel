@@ -23,9 +23,6 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 abstract class AbstractPropelSchemaTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -35,18 +32,12 @@ abstract class AbstractPropelSchemaTest extends Unit
         touch($this->getFixtureDirectory() . DIRECTORY_SEPARATOR . 'spy_bar.schema.xml');
     }
 
-    /**
-     * @return void
-     */
     public function tearDown(): void
     {
         $filesystem = new Filesystem();
         $filesystem->remove($this->getFixtureDirectory());
     }
 
-    /**
-     * @return string
-     */
     protected function getFixtureDirectory(): string
     {
         return __DIR__ . '/TempFixtures';

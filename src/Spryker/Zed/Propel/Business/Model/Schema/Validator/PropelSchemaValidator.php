@@ -47,11 +47,6 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
      */
     protected $whiteListedTableAttributes;
 
-    /**
-     * @param \Spryker\Zed\Propel\Business\Model\PropelGroupedSchemaFinderInterface $finder
-     * @param \Spryker\Zed\Propel\Dependency\Service\PropelToUtilTextServiceInterface $utilTextService
-     * @param array $whileListedTableAttributes
-     */
     public function __construct(
         PropelGroupedSchemaFinderInterface $finder,
         PropelToUtilTextServiceInterface $utilTextService,
@@ -62,9 +57,6 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
         $this->whiteListedTableAttributes = $whileListedTableAttributes;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\SchemaValidationTransfer
-     */
     public function validate(): SchemaValidationTransfer
     {
         $groupedSchemaFiles = $this->getSchemaFilesForValidation();
@@ -95,9 +87,6 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
         return $filteredGroupedSchemas;
     }
 
-    /**
-     * @return \SimpleXMLElement
-     */
     protected function createNewXml(): SimpleXMLElement
     {
         return new SimpleXMLElement('<database></database>');
@@ -119,11 +108,6 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
         return $mergeSourceXmlElements;
     }
 
-    /**
-     * @param \Symfony\Component\Finder\SplFileInfo $schemaFile
-     *
-     * @return \SimpleXMLElement
-     */
     protected function createXmlElement(SplFileInfo $schemaFile): SimpleXMLElement
     {
         return new SimpleXMLElement($schemaFile->getContents());
@@ -212,12 +196,6 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
         return $toXmlElements;
     }
 
-    /**
-     * @param \SimpleXMLElement $fromXmlChildElement
-     * @param string $tagName
-     *
-     * @return string
-     */
     protected function getElementName(SimpleXMLElement $fromXmlChildElement, string $tagName): string
     {
         $elementName = (array)$fromXmlChildElement->attributes();
@@ -257,13 +235,6 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
         return $elementName;
     }
 
-    /**
-     * @param \SimpleXMLElement $toXmlElement
-     * @param \SimpleXMLElement $fromXmlElement
-     * @param string $fileName
-     *
-     * @return \SimpleXMLElement
-     */
     protected function validateAttributes(SimpleXMLElement $toXmlElement, SimpleXMLElement $fromXmlElement, string $fileName): SimpleXMLElement
     {
         foreach ($fromXmlElement->attributes() as $key => $value) {
@@ -274,14 +245,6 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
         return $toXmlElement;
     }
 
-    /**
-     * @param \SimpleXMLElement $toXmlElement
-     * @param string $key
-     * @param string $value
-     * @param string $fileName
-     *
-     * @return void
-     */
     protected function validateAttribute(SimpleXMLElement $toXmlElement, string $key, string $value, string $fileName): void
     {
         $toXmlAttributes = iterator_to_array($toXmlElement->attributes());
@@ -299,13 +262,6 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
         }
     }
 
-    /**
-     * @param \SimpleXMLElement $toXmlElement
-     * @param string $key
-     * @param string $value
-     *
-     * @return void
-     */
     protected function addAttribute(SimpleXMLElement $toXmlElement, string $key, string $value): void
     {
         $toXmlAttributes = iterator_to_array($toXmlElement->attributes());
@@ -315,24 +271,11 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
         }
     }
 
-    /**
-     * @param array $toXmlAttributes
-     * @param string $key
-     * @param string $value
-     *
-     * @return bool
-     */
     protected function isAttributeValueChange(array $toXmlAttributes, string $key, string $value): bool
     {
         return (isset($toXmlAttributes[$key]) && (string)$toXmlAttributes[$key] !== $value);
     }
 
-    /**
-     * @param string $fileName
-     * @param string $key
-     *
-     * @return bool
-     */
     protected function isWhiteListed(string $fileName, string $key): bool
     {
         if (isset($this->whiteListedTableAttributes[$fileName]) && in_array($key, $this->whiteListedTableAttributes[$fileName])) {
@@ -342,11 +285,6 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
         return false;
     }
 
-    /**
-     * @param string $message
-     *
-     * @return void
-     */
     protected function addError(string $message): void
     {
         $schemaValidationErrorTransfer = new SchemaValidationErrorTransfer();
@@ -357,9 +295,6 @@ class PropelSchemaValidator implements PropelSchemaValidatorInterface
         $schemaValidationTransfer->addValidationError($schemaValidationErrorTransfer);
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\SchemaValidationTransfer
-     */
     protected function getSchemaValidationTransfer(): SchemaValidationTransfer
     {
         if (!$this->schemaValidationTransfer) {

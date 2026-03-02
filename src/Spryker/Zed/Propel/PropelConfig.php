@@ -326,9 +326,6 @@ class PropelConfig extends AbstractBundleConfig
         return $this->get(PropelConstants::ZED_DB_DATABASE);
     }
 
-    /**
-     * @return bool
-     */
     protected function isDynamicStoreEnabled(): bool
     {
         return (bool)getenv('SPRYKER_DYNAMIC_STORE_MODE');

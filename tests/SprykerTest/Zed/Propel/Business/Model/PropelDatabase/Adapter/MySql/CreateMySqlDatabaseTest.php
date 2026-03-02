@@ -31,9 +31,6 @@ use Spryker\Zed\Propel\PropelConfig;
  */
 class CreateMySqlDatabaseTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testCreateIfNotExistsShouldCreateDatabase(): void
     {
         if (Config::get(PropelConstants::ZED_DB_ENGINE) !== PropelConfig::DB_ENGINE_MYSQL) {

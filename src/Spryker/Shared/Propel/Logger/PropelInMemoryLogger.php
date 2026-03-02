@@ -64,19 +64,11 @@ class PropelInMemoryLogger implements PropelInMemoryLoggerInterface
         return static::$logs;
     }
 
-    /**
-     * @return void
-     */
     public function resetLogs(): void
     {
         static::$logs = [];
     }
 
-    /**
-     * @param string $key
-     *
-     * @return void
-     */
     public static function startSegment(string $key): void
     {
         static::$currentSegmentKey = $key;
@@ -86,9 +78,6 @@ class PropelInMemoryLogger implements PropelInMemoryLoggerInterface
         }
     }
 
-    /**
-     * @return void
-     */
     public static function endSegment(): void
     {
         static::$currentSegmentKey = null;
@@ -102,9 +91,6 @@ class PropelInMemoryLogger implements PropelInMemoryLoggerInterface
         return static::$segmentedLogs;
     }
 
-    /**
-     * @return void
-     */
     public function resetSegmentedLogs(): void
     {
         static::$segmentedLogs = [];

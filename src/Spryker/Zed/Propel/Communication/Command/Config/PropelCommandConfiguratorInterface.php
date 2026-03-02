@@ -11,10 +11,5 @@ use Spryker\Zed\PropelOrm\Communication\Generator\ConfigurablePropelCommandInter
 
 interface PropelCommandConfiguratorInterface
 {
-    /**
-     * @param \Spryker\Zed\PropelOrm\Communication\Generator\ConfigurablePropelCommandInterface $configurablePropelCommand
-     *
-     * @return void
-     */
     public function configurePropelCommand(ConfigurablePropelCommandInterface $configurablePropelCommand): void;
 }

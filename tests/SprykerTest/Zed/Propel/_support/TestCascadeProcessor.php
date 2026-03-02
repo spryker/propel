@@ -20,9 +20,6 @@ class TestCascadeProcessor
         static::$entityList = [];
     }
 
-    /**
-     * @return array
-     */
     public function getEntityList(): array
     {
         return static::$entityList;

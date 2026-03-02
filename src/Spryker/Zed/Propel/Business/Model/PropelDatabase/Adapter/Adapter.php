@@ -122,19 +122,11 @@ class Adapter implements AdapterInterface
         $this->importCommand->importDatabase($backupPath);
     }
 
-    /**
-     * @return void
-     */
     public function dropTables(): void
     {
         $this->dropTablesCommand->dropTables();
     }
 
-    /**
-     * @param string $tableName
-     *
-     * @return bool
-     */
     public function tableExists(string $tableName): bool
     {
         return $this->tableExistenceCommand->tableExists($tableName);
