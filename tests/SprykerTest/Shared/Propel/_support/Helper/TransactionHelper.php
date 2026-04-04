@@ -9,7 +9,9 @@ namespace SprykerTest\Shared\Propel\Helper;
 
 use Codeception\Module;
 use Codeception\TestInterface;
+use Propel\Runtime\Connection\ConnectionInterface;
 use Propel\Runtime\Propel;
+use ReflectionClass;
 use ReflectionMethod;
 use Silex\Application;
 use Spryker\Service\Container\Container;
@@ -65,7 +67,26 @@ class TransactionHelper extends Module
     {
         parent::_after($test);
 
-        Propel::getWriteConnection('zed')->forceRollBack();
+        $connection = Propel::getWriteConnection('zed');
+
+        if (!$connection->inTransaction()) {
+            // DDL statements (CREATE TABLE / DROP TABLE) in MySQL/MariaDB cause an implicit COMMIT,
+            // ending the PDO transaction without Propel's nestedTransactionCount tracking it.
+            // Reset the counter so the next test can start a fresh transaction.
+            $this->resetNestedTransactionCount($connection);
+
+            return;
+        }
+
+        $connection->forceRollBack();
+    }
+
+    protected function resetNestedTransactionCount(ConnectionInterface $connection): void
+    {
+        $reflection = new ReflectionClass($connection);
+        $property = $reflection->getProperty('nestedTransactionCount');
+        $property->setAccessible(true);
+        $property->setValue($connection, 0);
     }
 
     public function _afterSuite(): void
