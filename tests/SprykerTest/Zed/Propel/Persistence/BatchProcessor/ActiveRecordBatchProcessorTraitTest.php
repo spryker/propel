@@ -35,7 +35,6 @@ class ActiveRecordBatchProcessorTraitTest extends Unit
      */
     protected const MODULES_TO_EXCLUDE = [
         'Payone',
-        'Configuration', // Remove after changing spy_configuration_storage.data to required=false
         'AiCommerce',
     ];
 
