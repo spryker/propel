@@ -111,6 +111,7 @@ trait ActiveRecordBatchProcessorTrait
 
     public function commitIdentical(): bool
     {
+        $this->removeEntities($this->entitiesToRemove);
         $this->insertIdenticalEntities($this->entitiesToInsert);
         $this->updateEntities($this->entitiesToUpdate);
 
@@ -454,7 +455,7 @@ trait ActiveRecordBatchProcessorTrait
         $tableMapClass = $this->getTableMapClass($entityClassName);
 
         $statements = [];
-
+        $requiresPrimaryKeyValue = $this->requiresPrimaryKeyValue();
         $statementsGroupedByInsertedColumns = [];
 
         foreach ($entities as $entity) {
@@ -465,7 +466,7 @@ trait ActiveRecordBatchProcessorTrait
                 $tableMapClass,
                 $entityClassName::TABLE_MAP,
                 $entity,
-                $this->requiresPrimaryKeyValue(),
+                $requiresPrimaryKeyValue,
             );
 
             $columnNamesForInsertWithPdoPlaceholder = array_map(function (array $columnDetails) use (&$keyIndex, $tableMapClass) {
@@ -478,17 +479,17 @@ trait ActiveRecordBatchProcessorTrait
 
             $key = implode(',', array_keys($columnNamesForInsertWithPdoPlaceholder));
 
-            $statementsGroupedByInsertedColumns[$key][] = $entity;
+            $statementsGroupedByInsertedColumns[$key][] = $valuesForInsert;
         }
 
-        foreach ($statementsGroupedByInsertedColumns as $entities) {
-            $statements[] = $this->buildInsertStatementIdentical($entityClassName, $entities);
+        foreach ($statementsGroupedByInsertedColumns as $valuesForInsertCollection) {
+            $statements[] = $this->buildInsertStatementIdentical($entityClassName, $valuesForInsertCollection);
         }
 
         return $statements;
     }
 
-    protected function buildInsertStatementIdentical(string $entityClassName, array $entities): StatementInterface
+    protected function buildInsertStatementIdentical(string $entityClassName, array $valuesForInsertCollection): StatementInterface
     {
         $tableMapClass = $this->getTableMapClass($entityClassName);
         $requiresPrimaryKeyValue = $this->requiresPrimaryKeyValue();
@@ -499,16 +500,17 @@ trait ActiveRecordBatchProcessorTrait
         $entitiesQueryParams = [];
         $entityQueryParams = [];
 
-        foreach ($entities as $entity) {
-            $entity = $this->updateDateTimes($entity);
-            $valuesForInsert = $this->prepareValuesForInsert(
-                $tableMapClass->getColumns(),
-                $tableMapClass,
-                $entityClassName::TABLE_MAP,
-                $entity,
-                $requiresPrimaryKeyValue,
-            );
-
+        foreach ($valuesForInsertCollection as $valuesForInsert) {
+            if (is_object($valuesForInsert)) {
+                $entity = $this->updateDateTimes($valuesForInsert);
+                $valuesForInsert = $this->prepareValuesForInsert(
+                    $tableMapClass->getColumns(),
+                    $tableMapClass,
+                    $entityClassName::TABLE_MAP,
+                    $entity,
+                    $requiresPrimaryKeyValue,
+                );
+            }
             foreach ($valuesForInsert as $columnDetails) {
                 if ($requiresPrimaryKeyValue && $columnDetails['columnMap']->isPrimaryKey() && $tableMapClass->getPrimaryKeyMethodInfo() !== null) {
                     $entityQueryParams[] = sprintf('(SELECT nextval(\'%s\'))', $tableMapClass->getPrimaryKeyMethodInfo());
