@@ -97,10 +97,20 @@ class PropelSchema implements PropelSchemaInterface
 
                 $this->getLogger()->info('Optional DB schema is detected in module `' . $moduleName . '` for feature `' . $featureName . '`.');
 
+                $moduleConfig = null;
+                $sharedModuleConfig = null;
+
                 try {
                     $moduleConfig = $this->bundleConfigResolver->resolve($moduleName);
+                } catch (BundleConfigNotFoundException $e) {
+                }
+
+                try {
                     $sharedModuleConfig = $this->sharedConfigResolver->resolve($moduleName);
-                } catch (BundleConfigNotFoundException | SharedConfigNotFoundException $e) {
+                } catch (SharedConfigNotFoundException $e) {
+                }
+
+                if ($moduleConfig === null && $sharedModuleConfig === null) {
                     throw new RuntimeException(
                         sprintf(
                             'Config class for module `%s` not found. This folder `%s` enables optional DB schema via module config.',
@@ -110,13 +120,16 @@ class PropelSchema implements PropelSchemaInterface
                     );
                 }
 
-                if (!method_exists($moduleConfig, $configFeatureEnabledMethod) && !method_exists($sharedModuleConfig, $configFeatureEnabledMethod)) {
+                if (
+                    ($moduleConfig === null || !method_exists($moduleConfig, $configFeatureEnabledMethod)) &&
+                    ($sharedModuleConfig === null || !method_exists($sharedModuleConfig, $configFeatureEnabledMethod))
+                ) {
                     throw new RuntimeException(
                         sprintf(
                             'Config method `%s::%s()` or `%s::%s()` not found. This folder `%s` requires that method to enable optional DB schema.',
-                            $moduleConfig::class,
+                            $moduleConfig ? $moduleConfig::class : 'none',
                             $configFeatureEnabledMethod,
-                            $sharedModuleConfig::class,
+                            $sharedModuleConfig ? $sharedModuleConfig::class : 'none',
                             $configFeatureEnabledMethod,
                             $schemaFile->getRealPath(),
                         ),
@@ -124,8 +137,8 @@ class PropelSchema implements PropelSchemaInterface
                 }
 
                 if (
-                    (method_exists($moduleConfig, $configFeatureEnabledMethod) && $moduleConfig->$configFeatureEnabledMethod()) ||
-                    (method_exists($sharedModuleConfig, $configFeatureEnabledMethod) && $sharedModuleConfig->$configFeatureEnabledMethod())
+                    ($moduleConfig !== null && method_exists($moduleConfig, $configFeatureEnabledMethod) && $moduleConfig->$configFeatureEnabledMethod()) ||
+                    ($sharedModuleConfig !== null && method_exists($sharedModuleConfig, $configFeatureEnabledMethod) && $sharedModuleConfig->$configFeatureEnabledMethod())
                 ) {
                     $this->getLogger()->info('Adding optional feature `' . $featureName . '` to the module `' . $moduleName . '` schema.');
 
