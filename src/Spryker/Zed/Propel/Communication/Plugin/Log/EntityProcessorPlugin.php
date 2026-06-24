@@ -19,21 +19,29 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 class EntityProcessorPlugin extends AbstractPlugin implements LogProcessorPluginInterface
 {
     /**
+     * @api
+     *
      * @var string
      */
     public const EXTRA = 'entity';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const CONTEXT_KEY = 'entity';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const RECORD_CONTEXT = 'context';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const RECORD_EXTRA = 'extra';

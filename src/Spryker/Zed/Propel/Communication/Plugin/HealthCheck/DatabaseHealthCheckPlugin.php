@@ -19,6 +19,8 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 class DatabaseHealthCheckPlugin extends AbstractPlugin implements HealthCheckPluginInterface
 {
     /**
+     * @api
+     *
      * @var string
      */
     public const DATABASE_HEALTH_CHECK_SERVICE_NAME = 'database';

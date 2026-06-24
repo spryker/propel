@@ -18,11 +18,15 @@ use Spryker\Zed\PropelOrm\Business\Builder\QueryBuilder;
 class PropelConfig extends AbstractBundleConfig
 {
     /**
+     * @api
+     *
      * @var string
      */
     public const DB_ENGINE_MYSQL = 'mysql';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const DB_ENGINE_PGSQL = 'pgsql';
