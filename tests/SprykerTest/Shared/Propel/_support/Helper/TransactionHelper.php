@@ -85,7 +85,6 @@ class TransactionHelper extends Module
     {
         $reflection = new ReflectionClass($connection);
         $property = $reflection->getProperty('nestedTransactionCount');
-        $property->setAccessible(true);
         $property->setValue($connection, 0);
     }
 

@@ -158,7 +158,6 @@ class PropelSchemaOptionalFeaturesTest extends Unit
         $fileInfo = new SplFileInfo($this->schemaFilePath, static::FEATURE_NAME, static::FEATURE_NAME . '/test_module.schema.xml');
 
         $method = (new ReflectionClass($schema))->getMethod('getGroupedSchemasWithOptionalFeatures');
-        $method->setAccessible(true);
 
         return $method->invoke($schema, [$fileInfo]);
     }
