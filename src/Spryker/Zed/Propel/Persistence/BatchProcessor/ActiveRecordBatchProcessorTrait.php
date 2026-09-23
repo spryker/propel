@@ -31,10 +31,9 @@ use Throwable;
  */
 trait ActiveRecordBatchProcessorTrait
 {
-    /**
-     * @var int
-     */
-    protected const UPDATE_CHUNK_SIZE = 200;
+    protected const int UPDATE_CHUNK_SIZE = 200;
+
+    protected const int INSERT_CHUNK_SIZE = 200;
 
     /**
      * @var array<string, array<\Propel\Runtime\ActiveRecord\ActiveRecordInterface>>
@@ -130,13 +129,15 @@ trait ActiveRecordBatchProcessorTrait
         foreach ($entitiesToInsert as $entityClassName => $entities) {
             $connection = $this->getWriteConnection($entityClassName);
 
-            $entities = $this->executeEntitiesPreSave($entities, $connection);
-            $entities = $this->executePreInsert($entities, $connection);
-            $statements = $this->buildInsertStatements($entityClassName, $entities);
-            $this->executeStatements($statements, $entityClassName, 'insert');
-            $this->postSaveEntityProcession($entities, $connection);
-            $this->executePostInsert($entities, $connection);
-            $this->executePostSave($entities, $connection);
+            foreach (array_chunk($entities, static::INSERT_CHUNK_SIZE) as $entityChunk) {
+                $entityChunk = $this->executeEntitiesPreSave($entityChunk, $connection);
+                $entityChunk = $this->executePreInsert($entityChunk, $connection);
+                $statements = $this->buildInsertStatements($entityClassName, $entityChunk);
+                $this->executeStatements($statements, $entityClassName, 'insert');
+                $this->postSaveEntityProcession($entityChunk, $connection);
+                $this->executePostInsert($entityChunk, $connection);
+                $this->executePostSave($entityChunk, $connection);
+            }
         }
     }
 
@@ -169,12 +170,15 @@ trait ActiveRecordBatchProcessorTrait
     {
         foreach ($entitiesToInsert as $entityClassName => $entities) {
             $connection = $this->getWriteConnection($entityClassName);
-            $entities = $this->executeEntitiesPreSave($entities, $connection);
-            $entities = $this->executePreInsert($entities, $connection);
-            $statement = $this->buildInsertStatementIdentical($entityClassName, $entities);
-            $this->executeStatements([$statement], $entityClassName, 'insert');
-            $this->postSaveEntityProcession($entities, $connection);
-            $this->executePostInsert($entities, $connection);
+
+            foreach (array_chunk($entities, static::INSERT_CHUNK_SIZE) as $entityChunk) {
+                $entityChunk = $this->executeEntitiesPreSave($entityChunk, $connection);
+                $entityChunk = $this->executePreInsert($entityChunk, $connection);
+                $statement = $this->buildInsertStatementIdentical($entityClassName, $entityChunk);
+                $this->executeStatements([$statement], $entityClassName, 'insert');
+                $this->postSaveEntityProcession($entityChunk, $connection);
+                $this->executePostInsert($entityChunk, $connection);
+            }
         }
     }
 
