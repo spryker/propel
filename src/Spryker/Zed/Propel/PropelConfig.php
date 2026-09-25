@@ -32,6 +32,11 @@ class PropelConfig extends AbstractBundleConfig
     public const DB_ENGINE_PGSQL = 'pgsql';
 
     /**
+     * @api
+     */
+    public const string DB_ENGINE_SQLITE = 'sqlite';
+
+    /**
      * @var int
      */
     protected const PROCESS_TIMEOUT = 600;
@@ -250,6 +255,7 @@ class PropelConfig extends AbstractBundleConfig
         $supportedEngines = $this->get(PropelConstants::ZED_DB_SUPPORTED_ENGINES, [
             static::DB_ENGINE_MYSQL => 'MySql',
             static::DB_ENGINE_PGSQL => 'PostgreSql',
+            static::DB_ENGINE_SQLITE => 'Sqlite',
         ]);
 
         if (!array_key_exists($dbEngine, $supportedEngines)) {

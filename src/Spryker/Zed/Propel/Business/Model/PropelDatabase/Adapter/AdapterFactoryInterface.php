@@ -18,4 +18,9 @@ interface AdapterFactoryInterface
      * @return \Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\AdapterInterface
      */
     public function createPostgreSqlAdapter();
+
+    /**
+     * @return \Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\AdapterInterface
+     */
+    public function createSqliteAdapter();
 }

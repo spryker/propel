@@ -19,6 +19,12 @@ use Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\PostgreSql\DropPost
 use Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\PostgreSql\ExportPostgreSqlDatabase;
 use Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\PostgreSql\ImportPostgreSqlDatabase;
 use Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\PostgreSql\TableExistencePostgreSqlDatabase;
+use Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\Sqlite\CreateSqliteDatabase;
+use Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\Sqlite\DropSqliteDatabase;
+use Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\Sqlite\DropSqliteDatabaseTables;
+use Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\Sqlite\ExportSqliteDatabase;
+use Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\Sqlite\ImportSqliteDatabase;
+use Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\Sqlite\TableExistenceSqliteDatabase;
 use Spryker\Zed\Propel\Business\Model\PropelDatabase\Command\DropDatabaseTablesInterface;
 use Spryker\Zed\Propel\Business\Model\PropelDatabase\Command\TableExistenceInterface;
 use Spryker\Zed\Propel\PropelConfig;
@@ -146,6 +152,64 @@ class AdapterFactory implements AdapterFactoryInterface
     public function createDropPostgreSqlDatabaseTablesCommand(): DropDatabaseTablesInterface
     {
         return new DropPostgreSqlDatabaseTables();
+    }
+
+    /**
+     * @return \Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\AdapterInterface
+     */
+    public function createSqliteAdapter()
+    {
+        return new Adapter(
+            PropelConfig::DB_ENGINE_SQLITE,
+            $this->createSqliteCreateCommand(),
+            $this->createSqliteDropCommand(),
+            $this->createSqliteExportCommand(),
+            $this->createSqliteImportCommand(),
+            $this->createDropSqliteDatabaseTablesCommand(),
+            $this->createSqliteTableExistenceCommand(),
+        );
+    }
+
+    /**
+     * @return \Spryker\Zed\Propel\Business\Model\PropelDatabase\Command\CreateDatabaseInterface|\Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\Sqlite\CreateSqliteDatabase
+     */
+    protected function createSqliteCreateCommand()
+    {
+        return new CreateSqliteDatabase();
+    }
+
+    /**
+     * @return \Spryker\Zed\Propel\Business\Model\PropelDatabase\Command\DropDatabaseInterface|\Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\Sqlite\DropSqliteDatabase
+     */
+    protected function createSqliteDropCommand()
+    {
+        return new DropSqliteDatabase();
+    }
+
+    /**
+     * @return \Spryker\Zed\Propel\Business\Model\PropelDatabase\Command\ExportDatabaseInterface|\Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\Sqlite\ExportSqliteDatabase
+     */
+    protected function createSqliteExportCommand()
+    {
+        return new ExportSqliteDatabase();
+    }
+
+    /**
+     * @return \Spryker\Zed\Propel\Business\Model\PropelDatabase\Command\ImportDatabaseInterface|\Spryker\Zed\Propel\Business\Model\PropelDatabase\Adapter\Sqlite\ImportSqliteDatabase
+     */
+    protected function createSqliteImportCommand()
+    {
+        return new ImportSqliteDatabase();
+    }
+
+    public function createDropSqliteDatabaseTablesCommand(): DropDatabaseTablesInterface
+    {
+        return new DropSqliteDatabaseTables();
+    }
+
+    protected function createSqliteTableExistenceCommand(): TableExistenceInterface
+    {
+        return new TableExistenceSqliteDatabase();
     }
 
     public function createDropMySqlDatabaseTablesCommand(): DropDatabaseTablesInterface
