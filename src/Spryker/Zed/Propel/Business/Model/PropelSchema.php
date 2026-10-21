@@ -55,6 +55,10 @@ class PropelSchema implements PropelSchemaInterface
         foreach ($schemaFiles as $fileName => $groupedSchemas) {
             $groupedSchemas = $this->getGroupedSchemasWithOptionalFeatures($groupedSchemas);
 
+            if (!$groupedSchemas) {
+                continue;
+            }
+
             if ($this->needMerge($groupedSchemas)) {
                 $content = $this->merger->merge($groupedSchemas);
             } else {

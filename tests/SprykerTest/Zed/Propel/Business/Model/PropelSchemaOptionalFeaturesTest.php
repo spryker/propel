@@ -146,6 +146,25 @@ class PropelSchemaOptionalFeaturesTest extends Unit
         );
     }
 
+    public function testCopySkipsSchemaWhenFeatureIsDisabledAndNoBaseSchemaExists(): void
+    {
+        // Arrange
+        $targetDirectory = dirname($this->tempDir, 4) . '/target';
+        $schema = new PropelSchema(
+            new PropelGroupedSchemaFinder(new PropelSchemaFinder([$this->tempDir])),
+            new PropelSchemaWriter(new Filesystem(), $targetDirectory),
+            $this->createPropelSchemaMerger(),
+            $this->createBundleConfigResolverReturning($this->createConfigWithMethod(false)),
+            $this->createSharedConfigResolverThrowing(),
+        );
+
+        // Act
+        $schema->copy();
+
+        // Assert
+        $this->assertFileDoesNotExist($targetDirectory . '/test_module.schema.xml');
+    }
+
     /**
      * @return array<\Symfony\Component\Finder\SplFileInfo>
      */
