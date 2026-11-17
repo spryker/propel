@@ -101,17 +101,16 @@ class PropelSchema implements PropelSchemaInterface
 
                 $this->getLogger()->info('Optional DB schema is detected in module `' . $moduleName . '` for feature `' . $featureName . '`.');
 
-                $moduleConfig = null;
-                $sharedModuleConfig = null;
-
                 try {
                     $moduleConfig = $this->bundleConfigResolver->resolve($moduleName);
                 } catch (BundleConfigNotFoundException $e) {
+                    $moduleConfig = null;
                 }
 
                 try {
                     $sharedModuleConfig = $this->sharedConfigResolver->resolve($moduleName);
                 } catch (SharedConfigNotFoundException $e) {
+                    $sharedModuleConfig = null;
                 }
 
                 if ($moduleConfig === null && $sharedModuleConfig === null) {
